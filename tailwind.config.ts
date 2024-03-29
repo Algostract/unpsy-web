@@ -25,8 +25,8 @@ module.exports = {
     },
     fontFamily: {
       brand: ['Arkhip', 'sans-serif'],
-      head: ['Source Sans Pro', 'sans-serif'],
-      body: ['Roboto', 'sans-serif'],
+      head: ['"Exo 2"', 'sans-serif'],
+      body: ['Poppins', 'sans-serif'],
     },
     fontWeight: {
       light: 300,

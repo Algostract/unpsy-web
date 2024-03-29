@@ -70,7 +70,7 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
       </div> -->
       <h6 class="col-start-1 h-fit text-lg">{{ name }}</h6>
       <BaseRibbon :title="isRecentlyPublished ? 'new' : null" class="absolute -right-[5px] top-14 bg-dark-400" />
-      <div class="col-start-1 col-span-2 flex gap-2 h-fit text-sm opacity-50">
+      <div class="col-start-1 col-span-2 flex gap-2 h-fit text-xs opacity-50">
         <span>Sub Scales {{ subScales.length }}</span>
         <span>&#x2022</span>
         <span class="capitalize">{{ type }}</span>
@@ -83,9 +83,9 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
             class="capitalize cursor-text" />
         </div>
       </div>
-      <span class="row-start-4 col-start-1 col-span-2 self-center w-fit text-sm opacity-50">{{ updatedIn }}</span>
-      <BaseButton class="row-start-4 col-start-2 justify-self-end self-end hover:bg-primary-400" size="S" :rounded="true"
-        icon="keyboard" title="Start" @click="onOpenTest" />
+      <span class="row-start-4 col-start-1 col-span-2 self-center w-fit text-xs opacity-50">{{ updatedIn }}</span>
+      <BaseButton class="row-start-4 col-start-2 justify-self-end self-end hover:bg-primary-400" size="S"
+        :rounded="true" icon="keyboard" title="Start" @click="onOpenTest" />
     </div>
   </div>
 </template>

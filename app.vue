@@ -17,8 +17,8 @@ useHead({
       href: 'https://fonts.googleapis.com'
     },
     {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Source+Sans+3:wght@300;400;500&display=swap',
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;1,400&family=Poppins:wght@300;400;500&display=swap",
     },
   ],
 })
@@ -84,8 +84,12 @@ useSchemaOrg([
   @apply rounded-md bg-light-400 dark:bg-dark-600;
 }
 
+html {
+  @apply relative scroll-smooth overflow-x-hidden;
+}
+
 body {
-  @apply text-black dark:text-white font-body bg-white dark:bg-dark-400;
+  @apply relative min-h-screen text-black dark:text-white font-body bg-white dark:bg-dark-400;
 }
 
 .nuxt-icon>svg {

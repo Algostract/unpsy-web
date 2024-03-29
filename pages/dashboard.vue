@@ -4,7 +4,8 @@ import { Grid } from '@splidejs/splide-extension-grid';
 import { useUser } from "~/stores/user";
 
 definePageMeta({
-  middleware: "auth"
+  middleware: "auth",
+  layout: 'panel'
 })
 useHead({
   title: 'Dashboard',
@@ -25,7 +26,8 @@ const splideOption: Options = {
       row: '0.75rem',
       col: '0.75rem',
     },
-  }, breakpoints: {
+  },
+  breakpoints: {
     1280: {
       grid: {
         cols: 3
@@ -53,7 +55,7 @@ const splideOption: Options = {
     }
   }
 };
-const splide = ref()
+// const splide = ref()
 const userStore = useUser()
 
 const { pending, error, data: scales } = useFetch('/api/scale', { method: 'GET' })
@@ -95,10 +97,11 @@ const openedModel = ref<'scale' | 'payment' | 'feedback' | null>(null)
       </Splide>
     </section>
     <ModelScale v-if="openedModel === 'scale' && selectedScale" :is-open="openedModel === 'scale'"
-      :name="selectedScale.name" :type="selectedScale.type" :count="selectedScale.count" :options="selectedScale.options"
-      @close="selectedScaleName = null; openedModel = null" />
+      :name="selectedScale.name" :type="selectedScale.type" :count="selectedScale.count"
+      :options="selectedScale.options" @close="selectedScaleName = null; openedModel = null" />
     <ModelPayment v-else-if="openedModel === 'payment' && selectedScale" :is-open="openedModel === 'payment'"
-      :scales="scales ?? []" :selected-scale="selectedScale.name" @close="selectedScaleName = null; openedModel = null" />
+      :scales="scales ?? []" :selected-scale="selectedScale.name"
+      @close="selectedScaleName = null; openedModel = null" />
   </main>
 </template>
 

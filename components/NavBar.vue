@@ -23,7 +23,7 @@ function onLogout() {
 <template>
   <!-- TODO: Make it collapsable -->
   <nav
-    class="relative shrink-0 bottom-0 flex flex-col px-[1.25rem] py-[0.75rem] sm:py-8 rounded-t-[1.5rem] sm:rounded-l-none sm:rounded-r-[1.5rem] w-screen sm:w-[100px] lg:w-[252px] md:max-w-[252px] bg-light-500 dark:bg-dark-500 overflow-hidden z-50">
+    class="relative shrink-0 bottom-0 flex flex-col border-r border-primary-500 px-[1.25rem] py-[0.75rem] sm:py-8  w-screen sm:w-[100px] lg:w-[252px] md:max-w-[252px] bg-light-500 dark:bg-dark-500 overflow-hidden z-50">
     <div class="hidden sm:flex items-center justify-center mx-auto w-fit !text-primary-400">
       <NuxtIcon name="psy" class="text-[56px]" />
       <h1 class="font-brand text-[28px] uppercase">Psy</h1>

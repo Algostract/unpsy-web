@@ -2,6 +2,10 @@
 import { type SubscribedScale } from "~/utils/models";
 import doc from "~~/assets/images/documents.svg?raw";
 
+definePageMeta({
+  middleware: "auth",
+  layout: 'panel'
+})
 useHead({
   title: 'Scanner',
 })
@@ -128,12 +132,13 @@ onBeforeMount(execute)
       <div class="mx-auto flex flex-col gap-3 items-center">
         <BaseButton title="Upload Documents" size="S" icon="upload" class="!text-base" @click="openFileDialog" />
         <span class="uppercase text-sm">or</span>
-        <BaseButton title="Download Templates" size="S" icon="download" class="!text-base !bg-dark-500 hover:!bg-dark-600"
-          @click="onDownload" />
+        <BaseButton title="Download Templates" size="S" icon="download"
+          class="!text-base !bg-dark-500 hover:!bg-dark-600" @click="onDownload" />
       </div>
     </div>
     <div v-else class="relative w-full h-[504px] text-[24px] ">
-      <NuxtIcon v-if="isLoading" name="loader" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30" />
+      <NuxtIcon v-if="isLoading" name="loader"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30" />
       <div class="mx-auto py-5 w-fit h-full" :class="{ 'blur-sm': isLoading }">
         <div v-if="isLoading" class="absolute left-1 right-1 top-1 bottom-1 bg-dark-400/60 z-20 !text-white" />
         <img v-for="document in documents" :src="document" class="h-full object-contain" />
@@ -142,8 +147,8 @@ onBeforeMount(execute)
     <div v-if="documents.length > 0 && !isLoading" class="absolute left-4 right-4 bottom-4 flex justify-between">
       <BaseButton title="Reset" size="S" icon="chevron-bold" class="!text-base w-[110px] justify-center"
         @click="onReset" />
-      <BaseButton title="Continue" size="S" icon="chevron-bold-right" class="flex-row-reverse !pl-[14px] !pr-3 !text-base"
-        @click="onContinue" />
+      <BaseButton title="Continue" size="S" icon="chevron-bold-right"
+        class="flex-row-reverse !pl-[14px] !pr-3 !text-base" @click="onContinue" />
     </div>
     <ModelDownload v-if="openModel === 'download'" :is-open="openModel === 'download'" :scales="scales"
       @close="openModel = null" />

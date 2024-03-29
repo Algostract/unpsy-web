@@ -13,9 +13,9 @@ export default defineNuxtConfig({
     'nuxt-gtag',
     'nuxt-icons',
   ],
-  routeRules: {
-    '/': { redirect: '/dashboard' }
-  },
+  /*  routeRules: {
+     '/': { redirect: '/dashboard' }
+   }, */
   typescript: {
     shim: false,
   },
@@ -24,8 +24,6 @@ export default defineNuxtConfig({
       authUrl: '',
       apiUrl: '',
       omrUrl: '',
-      anoyToken: '',
-      anoyRefreshToken: ''
     },
     private: {
       corsUrl: '',
