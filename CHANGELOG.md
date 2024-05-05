@@ -1,5 +1,11 @@
 # psy
 
+## 0.4.5
+
+### Patch Changes
+
+- 7ec8eb3: chore: deploy.yml updated
+
 ## 0.4.4
 
 ### Patch Changes
