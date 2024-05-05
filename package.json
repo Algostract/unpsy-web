@@ -13,48 +13,51 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "prisma generate && nuxt prepare",
-    "start": "node .output/server/index.mjs",
+    "postinstall": "nuxt prepare && prisma generate",
+    "db:start": "cockroach start-single-node --insecure --listen-addr=localhost --store=database",
+    "db:seed": "prisma db seed",
+    "db:backup": "npx tsx prisma/scripts/backup.ts",
+    "db:pull": "prisma db pull",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:reset": "prisma migrate reset",
+    "prisma:studio": "prisma studio",
     "clean": "nuxt cleanup",
-    "database": "cockroach start-single-node --insecure --listen-addr=localhost --store=database",
-    "seed": "prisma db seed",
-    "migrate:create": "prisma migrate dev --create-only",
-    "migrate:apply": "prisma migrate dev",
-    "studio": "prisma studio",
-    "backup": "npx ts-node --project prisma/tsconfig.json prisma/scripts/backup.ts"
+    "start": "node .output/server/index.mjs"
   },
   "prisma": {
-    "seed": "npx ts-node --project prisma/tsconfig.json prisma/scripts/seed.ts"
+    "seed": "npx tsx prisma/scripts/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.13.0",
+    "@splidejs/splide-extension-grid": "^0.4.1",
+    "@splidejs/vue-splide": "^0.6.12",
+    "uqr": "^0.1.2",
+    "vee-validate": "^4.12.6"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@nuxt/devtools": "latest",
-    "@nuxt/image": "^1.5.0",
-    "@nuxt/test-utils": "^3.12.0",
-    "@nuxtjs/color-mode": "^3.3.3",
+    "@nuxt/image": "^1.7.0",
+    "@nuxt/test-utils": "^3.12.1",
+    "@nuxtjs/color-mode": "^3.4.1",
     "@nuxtjs/seo": "^2.0.0-rc.10",
-    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/node": "^20.12.7",
-    "@vite-pwa/nuxt": "^0.6.0",
+    "@types/node": "^20.12.8",
+    "@vite-pwa/nuxt": "^0.7.0",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.11.2",
     "nuxt-gtag": "^2.0.5",
     "nuxt-icons": "^3.2.1",
-    "prisma": "^5.12.1",
+    "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.4",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.12.1",
-    "@splidejs/splide-extension-grid": "^0.4.1",
-    "@splidejs/vue-splide": "^0.6.12",
-    "uqr": "^0.1.2",
-    "vee-validate": "^4.12.6"
+    "typescript": "^5.4.5",
+    "vue": "^3.4.26",
+    "vue-router": "^4.3.2"
   }
 }
