@@ -48,9 +48,6 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
 
-      - name: Display structure of downloaded files
-        run: ls -R -a
-
       - name: Upload artifact to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
