@@ -16,9 +16,6 @@ export default defineNuxtConfig({
   /*  routeRules: {
      '/': { redirect: '/dashboard' }
    }, */
-  typescript: {
-    shim: false,
-  },
   runtimeConfig: {
     public: {
       authUrl: '',
@@ -33,6 +30,8 @@ export default defineNuxtConfig({
       paymentId: '',
       paymentUserId: '',
       paymentSecret: '',
+      notionKey: '',
+      notionDBId: ''
     },
   },
   image: {

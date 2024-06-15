@@ -13,12 +13,12 @@ onMounted(() => {
   isMounted.value = true
 })
 
-const openedModel = ref<'feedback' | null>(null)
+const authStore = useAuth()
 
 function onHelp() {
   useTrackEvent('model_feedback_open')
 
-  openedModel.value = 'feedback'
+  authStore.updateFeedbackStatus('triggered')
 }
 </script>
 
@@ -31,6 +31,7 @@ function onHelp() {
     <div class="flex-grow py-8 px-4 sm:pl-0 overflow-y-auto">
       <slot />
     </div>
-    <ModelFeedback v-if="openedModel === 'feedback'" :is-open="openedModel === 'feedback'" @close="openedModel = null" />
+    <ModelFeedback v-if="authStore.showFeedbackModal" :is-open="authStore.showFeedbackModal"
+      @close="authStore.updateFeedbackStatus('submitted')" />
   </div>
 </template>

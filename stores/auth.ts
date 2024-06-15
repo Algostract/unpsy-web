@@ -23,6 +23,8 @@ export const useAuth = () => {
     const authToken = useStorage<string>('authToken', null)
     const accessToken = useStorage<string>('accessToken', null)
     const refreshToken = useStorage<string>('refreshToken', null)
+    const feedbackStatus = useStorage<'init' | 'triggered' | 'submitted'>('feedbackStatus', 'init')
+    const showFeedbackModal = computed(() => feedbackStatus.value === 'triggered')
     const info = ref<{
       name: string | undefined,
       image: string | undefined,
@@ -45,7 +47,7 @@ export const useAuth = () => {
     const isLoggedIn = computed(() => !!accessToken.value)
 
     async function init() {
-      if (process.server || isInit.value)
+      if (import.meta.server || isInit.value)
         return
       isInit.value = true
 
@@ -63,6 +65,14 @@ export const useAuth = () => {
         const { accessToken: access, refreshToken: refresh } = await anonymousLogin()
         setToken({ isRegistered: true, token: { access, refresh } })
       }
+    }
+
+    function updateFeedbackStatus(value: 'triggered' | 'submitted') {
+      console.log({ beforeFeedbackStatus: value })
+
+      if ((value === 'triggered' && feedbackStatus.value === 'init') || value === 'submitted')
+        feedbackStatus.value = value
+      console.log({ afterFeedbackStatus: feedbackStatus.value, showFeedbackModal: showFeedbackModal.value })
     }
 
     function setInfo(user: any) {
@@ -108,8 +118,8 @@ export const useAuth = () => {
     }
 
     return {
-      info, isPhoneVerified, isEmailVerified,
-      isLoggedIn,
+      info, isPhoneVerified, isEmailVerified, updateFeedbackStatus,
+      isLoggedIn, showFeedbackModal,
       init, setInfo, getToken, setToken, updateToken, resetToken
     }
   })

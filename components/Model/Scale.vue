@@ -26,6 +26,8 @@ const dataSplideOption: Options = {
   },
 };
 
+const authStore = useAuth()
+
 const splide = ref();
 const isLoading = ref(false)
 const isLastSlide = ref(false)
@@ -184,9 +186,14 @@ function onClose() {
     scale: props.name
   })
 
+  authStore.updateFeedbackStatus('triggered')
+
   result.value = undefined;
   emit('close')
 }
+onBeforeUnmount(() => {
+  authStore.updateFeedbackStatus('triggered')
+})
 </script>
 
 <template>

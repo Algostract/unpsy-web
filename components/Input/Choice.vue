@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   options: { name: string, value: number }[],
-  index: number,
+  index?: number,
   value?: number,
   isSelected?: boolean
   isInvalid?: boolean
@@ -18,7 +18,7 @@ const selectedChoice = computed(() => props.value)
 
 <template>
   <div class="w-max text-white">
-    <label class="inline-flex justify-center rounded-full py-1 w-[50px]"
+    <label v-if="index !== undefined" class="inline-flex justify-center rounded-full py-1 w-[50px]"
       :class="isInvalid && selectedChoice === undefined ? 'bg-alert-500' : (isSelected ? 'bg-primary-500' : (selectedChoice !== undefined ? 'bg-success-500' : 'bg-white text-black dark:bg-black dark:text-white'))">
       {{ index }}
     </label>

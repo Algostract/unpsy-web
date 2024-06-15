@@ -50,6 +50,7 @@ useSchemaOrg([
     description: description,
   }),
 ])
+
 </script>
 
 <template>
@@ -89,7 +90,7 @@ html {
 }
 
 body {
-  @apply relative min-h-screen text-black dark:text-white font-body bg-white dark:bg-dark-400;
+  @apply relative min-h-screen overflow-hidden text-black dark:text-white font-body bg-white dark:bg-dark-400;
 }
 
 .nuxt-icon>svg {

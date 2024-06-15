@@ -64,6 +64,7 @@ const selectedScaleName = ref<string | null>(null)
 const selectedScale = computed(() => selectedScaleName.value ? scales.value?.find(({ name }) => name === selectedScaleName.value) : undefined)
 
 const openedModel = ref<'scale' | 'payment' | 'feedback' | null>(null)
+
 </script>
 
 <template>

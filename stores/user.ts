@@ -1,3 +1,4 @@
+import { useStorage } from '@vueuse/core'
 import type { User } from "~/utils/models";
 
 interface PaymentInterfaces {
@@ -22,8 +23,9 @@ const updatePreference = useDebounceFn(async (preference:
 
 export const useUser = () => {
   const innerStore = defineStore('user', () => {
-    const authStore = useAuth()
+    // const authStore = useAuth()
     const isInit = ref(false)
+
 
     const name = ref<string>()
     const email = ref<string | null>()
@@ -50,13 +52,14 @@ export const useUser = () => {
     })
 
     async function init() {
-      if (process.server || isInit.value)
+      if (import.meta.server || isInit.value)
         return
       isInit.value = true
 
       try {
         const data = await getUser();
         // {id, name, email,phone,gender,dob }
+
 
         name.value = data.name
         email.value = data.email
@@ -65,7 +68,6 @@ export const useUser = () => {
         // gender.value = data.gender
         // payment.value = data.payment
         // preference.value = data.preference
-
       } catch (error) {
         console.error("User Store", error);
       }
@@ -96,7 +98,6 @@ export const useUser = () => {
 
       $preference.value = { ...value }
     })
-
 
     return {
       // ,dob, gender
