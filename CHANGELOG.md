@@ -1,5 +1,11 @@
 # psy
 
+## 0.5.0
+
+### Minor Changes
+
+- a3a3155: feat: feedback modal added
+
 ## 0.4.6
 
 ### Patch Changes
