@@ -24,9 +24,9 @@ useHead({
 })
 
 useSeoMeta({
-  ogType: "profile",
+  ogType: "website",
   ogImageWidth: 1280,
-  ogImageHeight: 640,
+  ogImageHeight: 720,
   fbAppId: 966242223397117,
   twitterCard: "summary_large_image",
   colorScheme: "dark light",
