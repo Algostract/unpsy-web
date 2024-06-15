@@ -1,5 +1,11 @@
 # psy
 
+## 0.5.1
+
+### Patch Changes
+
+- e6a6826: chore: og image added
+
 ## 0.5.0
 
 ### Minor Changes
