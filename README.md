@@ -11,7 +11,7 @@
   </a>
 </p>
 
-![Landing](public/previews/dashboard.jpg)
+![Landing](public/previews/landing.webp)
 
 # Scales
 | Scale   | Created | Tested | Published |

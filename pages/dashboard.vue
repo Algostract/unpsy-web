@@ -11,6 +11,20 @@ useHead({
   title: 'Dashboard',
 })
 
+const title = `Psychological Assessment Toolkit - Dashboard`
+const description = `A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. 
+It includes various assessments scales like EPQ, MACI, MCMI, TCI, JEPQ.`
+const url = "https://psy.monalisa-bairagi.com"
+
+useSeoMeta({
+  title: title,
+  ogTitle: title,
+  description: description,
+  ogDescription: description,
+  ogImage: url + "/previews/dashboard.webp",
+  ogUrl: url + '/dashboard',
+})
+
 const splideOption: Options = {
   arrows: true,
   pagination: true,

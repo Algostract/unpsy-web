@@ -10,6 +10,20 @@ useHead({
   title: 'Scanner',
 })
 
+const title = `Psychological Assessment Toolkit - Scanner`
+const description = `A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. 
+It includes various assessments scales like EPQ, MACI, MCMI, TCI, JEPQ.`
+const url = "https://psy.monalisa-bairagi.com"
+
+useSeoMeta({
+  title: title,
+  ogTitle: title,
+  description: description,
+  ogDescription: description,
+  ogImage: url + "/previews/scanner.webp",
+  ogUrl: url + "/scanner",
+})
+
 const scale = ref<{
   name: string, type: 'binary' | 'pentanary', count: number,
   options: {

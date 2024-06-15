@@ -25,14 +25,8 @@ useHead({
 
 useSeoMeta({
   ogType: "profile",
-  title: title,
-  ogTitle: title,
-  description: description,
-  ogDescription: description,
-  ogImage: url + "/previews/landing.webp",
   ogImageWidth: 1280,
   ogImageHeight: 640,
-  ogUrl: url,
   fbAppId: 966242223397117,
   twitterCard: "summary_large_image",
   colorScheme: "dark light",
@@ -50,7 +44,6 @@ useSchemaOrg([
     description: description,
   }),
 ])
-
 </script>
 
 <template>
