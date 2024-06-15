@@ -3,7 +3,7 @@ import type { User } from "~/utils/models";
 
 const prisma = new PrismaClient()
 
-export default defineProtectedEventHandler<User>(async (event, userId) => {
+export default defineProtectedEventHandler<User>(async (_event, userId) => {
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
@@ -25,7 +25,7 @@ export default defineProtectedEventHandler<User>(async (event, userId) => {
       email: user.email,
       phone: user.phone,
       subscriptions: user.subscriptions.map<Subscription>(({ id, name, expiresAt }) => ({ id, name, expiresAt })),
-      reports: user.reports.map(({ id, scale, status, data, value, patientId, createdAt }) => ({ id, scale, status, data: JSON.parse(data?.toString() ?? '{}'), value: JSON.parse(value?.toString() ?? '{}'), patientId, createdAt })),
+      reports: user.reports.map(({ id, scale, status, data, value, patientId, createdAt }) => ({ id, scale, status, data: JSON.parse(data?.toString() ?? '[]'), value: JSON.parse(value?.toString() ?? '[]'), patientId, createdAt })),
       preference: user.preference ? { colorMode: user.preference.isModeLight ? 'light' : 'dark', payment: user.preference.payment.toLowerCase() as 'upi' } : null
     }
   } catch (error: any) {

@@ -6,14 +6,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <Teleport to="body">
-    <div v-if="isOpen" class="fixed inset-0 flex items-center bg-black/50 z-50 overflow-y-auto">
-      <dialog open class="relative max-w-[700px] p-4 h-min rounded-xl bg-light-500 dark:bg-dark-500" v-bind="$attrs">
-        <button v-if="hasCloseOption" class="absolute top-4 right-4" @click="emit('close')">
-          <NuxtIcon name="cross" class="text-[24px]" />
-        </button>
-        <slot />
-      </dialog>
-    </div>
-  </Teleport>
+  <ClientOnly>
+    <Teleport to="body">
+      <div v-if="isOpen" class="fixed inset-0 flex items-center bg-black/50 z-50 overflow-y-auto">
+        <dialog open class="relative max-w-[700px] p-4 h-min rounded-xl bg-light-500 dark:bg-dark-500" v-bind="$attrs">
+          <button v-if="hasCloseOption" class="absolute top-4 right-4" @click="emit('close')">
+            <NuxtIcon name="cross" class="text-[24px]" />
+          </button>
+          <slot />
+        </dialog>
+      </div>
+    </Teleport>
+  </ClientOnly>
 </template>
