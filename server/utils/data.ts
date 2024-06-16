@@ -153,7 +153,7 @@ const scales: Scale[] = [
     publishedAt: '2024-02-23T14:08:44.658Z',
     updatedAt: '2024-02-23T14:08:44.658Z'
   },
-  {
+  /* {
     name: 'MMPI-RF',
     type: 'binary',
     count: 338,
@@ -216,7 +216,7 @@ const scales: Scale[] = [
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
     updatedAt: '2024-02-23T14:08:44.658Z'
-  },
+  }, */
   {
     name: 'MPQ',
     type: 'binary',
@@ -263,7 +263,7 @@ const scales: Scale[] = [
     publishedAt: '2024-02-23T14:08:44.658Z',
     updatedAt: '2024-02-23T14:08:44.658Z'
   },
-  {
+  /* {
     name: 'SCL-90R',
     type: 'pentanary',
     count: 90,
@@ -292,7 +292,7 @@ const scales: Scale[] = [
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
     updatedAt: '2024-02-23T14:08:44.658Z'
-  },
+  }, */
   {
     name: 'DSMD-A',
     type: 'pentanary',
