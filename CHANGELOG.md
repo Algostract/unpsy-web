@@ -1,5 +1,11 @@
 # psy
 
+## 0.5.2
+
+### Patch Changes
+
+- 79e6514: hotfix: MACI and MMPI has been unpublished
+
 ## 0.5.1
 
 ### Patch Changes
