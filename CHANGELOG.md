@@ -1,5 +1,11 @@
 # psy
 
+## 0.6.0
+
+### Minor Changes
+
+- dc4f783: chore: Containerized
+
 ## 0.5.2
 
 ### Patch Changes
