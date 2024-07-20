@@ -1,5 +1,11 @@
 # psy
 
+## 0.6.1
+
+### Patch Changes
+
+- c21eb6f: fix: added prisma in dockerfile
+
 ## 0.6.0
 
 ### Minor Changes
