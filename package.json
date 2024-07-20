@@ -29,7 +29,9 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "docker:build": "docker build --build-arg VERSION_TAG=v0.6.0 -t unpsy:v0.6.0 .",
+    "docker:start": "docker run --detach --name unpsy --env-file .env.prod -p 2000:3000 unpsy:latest"
   },
   "prisma": {
     "seed": "npx tsx prisma/scripts/seed.ts"

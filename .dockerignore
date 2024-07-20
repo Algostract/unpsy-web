@@ -27,8 +27,8 @@ logs
 # Local env files
 .env*
 
+# database Files
+database
+
 .dockerignore
 Dockerfile
-
-# Static Files
-static

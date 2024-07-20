@@ -16,11 +16,13 @@ export default defineNuxtConfig({
     'nuxt-gtag',
     'nuxt-icons',
   ],
-
   /*  routeRules: {
      '/': { redirect: '/dashboard' }
    }, */
   runtimeConfig: {
+    app: {
+      version: '',
+    },
     public: {
       authUrl: '',
       apiUrl: '',
@@ -57,6 +59,9 @@ export default defineNuxtConfig({
   },
 
   pwa: {
+    scope: '/',
+    base: '/',
+    injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
       name: 'Psy',
@@ -234,7 +239,6 @@ export default defineNuxtConfig({
   },
 
   gtag: {
-    id: 'G-YPSNKTWEYP',
   },
 
   compatibilityDate: '2024-07-20',
