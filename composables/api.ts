@@ -1,7 +1,8 @@
-import { NitroFetchRequest, TypedInternalResponse } from "nitropack";
-import { FetchOptions, ofetch } from "ofetch";
-import { parseJWT } from "~~/utils/helpers";
-import { useAuth } from "~~/stores/auth";
+import type { NitroFetchRequest, TypedInternalResponse } from 'nitropack'
+import type { FetchOptions } from 'ofetch'
+import { ofetch } from 'ofetch'
+import { parseJWT } from '~~/utils/helpers'
+import { useAuth } from '~~/stores/auth'
 
 export const $fetchAPI = <T = unknown, R extends NitroFetchRequest = NitroFetchRequest>(request: R, opts?: FetchOptions | undefined): Promise<TypedInternalResponse<R, T>> => {
   const config = useRuntimeConfig()
@@ -10,13 +11,13 @@ export const $fetchAPI = <T = unknown, R extends NitroFetchRequest = NitroFetchR
 
   const customFetch = ofetch.create({
     baseURL: baseURL,
-    headers: { 'Authorization': `Bearer ${authStore.getToken("access")}` },
+    headers: { Authorization: `Bearer ${authStore.getToken('access')}` },
     async onRequest({ request, options }) {
-      console.log("Intercepted API", request);
+      console.log('Intercepted API', request)
 
-      if (!authStore.getToken("access")) {
-        console.log({ accessToken: authStore.getToken("access") })
-        throw createError({ "message": "No Access Token Found" })
+      if (!authStore.getToken('access')) {
+        console.log({ accessToken: authStore.getToken('access') })
+        throw createError({ message: 'No Access Token Found' })
       }
       // check access token is expired
       try {
@@ -24,9 +25,9 @@ export const $fetchAPI = <T = unknown, R extends NitroFetchRequest = NitroFetchR
       } catch (error) {
         await authStore.updateToken()
         // @ts-ignore
-        options.headers['Authorization'] = `Bearer ${authStore.getToken("access")}`
+        options.headers['Authorization'] = `Bearer ${authStore.getToken('access')}`
       }
-    }
+    },
   })
 
   // @ts-ignore
@@ -41,10 +42,9 @@ export const $fetchAuth = <T = unknown, R extends NitroFetchRequest = NitroFetch
   const customFetch = ofetch.create({
     baseURL: baseURL,
     onRequest({ request, options }) {
-      console.log("Intercepted API", request);
+      console.log('Intercepted API', request)
 
-      if (authStore.getToken("auth"))
-        options.headers = { 'Authorization': `Bearer ${authStore.getToken("auth")}` }
+      if (authStore.getToken('auth')) options.headers = { Authorization: `Bearer ${authStore.getToken('auth')}` }
     },
   })
 

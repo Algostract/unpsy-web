@@ -1,21 +1,21 @@
 import { useStorage } from '@vueuse/core'
-import type { AuthResponse } from "~~/utils/models";
+import type { AuthResponse } from '~~/utils/models'
 
 function anonymousLogin() {
-  console.log('Anonymous Login');
+  console.log('Anonymous Login')
 
-  return $fetchAuth<{ accessToken: string, refreshToken: string }>("/anonymous", {
-    method: "GET",
+  return $fetchAuth<{ accessToken: string; refreshToken: string }>('/anonymous', {
+    method: 'GET',
   })
 }
 
 // Update
 function refetchToken(refreshToken: string) {
-  return $fetchAuth<{ accessToken: string }>("/token", {
-    method: "PUT",
-    body: { refreshToken }
+  return $fetchAuth<{ accessToken: string }>('/token', {
+    method: 'PUT',
+    body: { refreshToken },
   })
-};
+}
 
 export const useAuth = () => {
   const innerStore = defineStore('auth', () => {
@@ -26,12 +26,12 @@ export const useAuth = () => {
     const feedbackStatus = useStorage<'init' | 'triggered' | 'submitted'>('feedbackStatus', 'init')
     const showFeedbackModal = computed(() => feedbackStatus.value === 'triggered')
     const info = ref<{
-      name: string | undefined,
-      image: string | undefined,
-      email: string | undefined,
-      phone: string | undefined,
-      dob: string | undefined,
-      gender: string | undefined,
+      name: string | undefined
+      image: string | undefined
+      email: string | undefined
+      phone: string | undefined
+      dob: string | undefined
+      gender: string | undefined
     }>({
       name: undefined,
       image: undefined,
@@ -47,8 +47,7 @@ export const useAuth = () => {
     const isLoggedIn = computed(() => !!accessToken.value)
 
     async function init() {
-      if (import.meta.server || isInit.value)
-        return
+      if (import.meta.server || isInit.value) return
       isInit.value = true
 
       try {
@@ -58,9 +57,9 @@ export const useAuth = () => {
       }
 
       if (!accessToken.value && !!refreshToken.value) {
-        console.warn("No Access Token Found");
+        console.warn('No Access Token Found')
       } else if (!accessToken.value && !refreshToken.value) {
-        console.warn("No Access and Refreash Token Found");
+        console.warn('No Access and Refreash Token Found')
 
         const { accessToken: access, refreshToken: refresh } = await anonymousLogin()
         setToken({ isRegistered: true, token: { access, refresh } })
@@ -70,21 +69,20 @@ export const useAuth = () => {
     function updateFeedbackStatus(value: 'triggered' | 'submitted') {
       console.log({ beforeFeedbackStatus: value })
 
-      if ((value === 'triggered' && feedbackStatus.value === 'init') || value === 'submitted')
-        feedbackStatus.value = value
+      if ((value === 'triggered' && feedbackStatus.value === 'init') || value === 'submitted') feedbackStatus.value = value
       console.log({ afterFeedbackStatus: feedbackStatus.value, showFeedbackModal: showFeedbackModal.value })
     }
 
     function setInfo(user: any) {
-      if ("email" in user) {
+      if ('email' in user) {
         info.value.name = user.name
         info.value.email = user.email
-      } else if ("phone" in user) {
+      } else if ('phone' in user) {
         info.value.phone = user.phone
       }
     }
 
-    function getToken(type: "auth" | "refresh" | "access") {
+    function getToken(type: 'auth' | 'refresh' | 'access') {
       switch (type) {
         case 'auth':
           return authToken.value
@@ -96,10 +94,10 @@ export const useAuth = () => {
     }
 
     function setToken({ isRegistered, token }: Omit<AuthResponse, 'user' | 'timeoutAt' | 'retryTimeoutAt'>) {
-      if (isRegistered && "access" in token) {
+      if (isRegistered && 'access' in token) {
         accessToken.value = token.access
         refreshToken.value = token.refresh
-      } else if ("auth" in token) {
+      } else if ('auth' in token) {
         authToken.value = token.auth
       }
     }
@@ -111,21 +109,30 @@ export const useAuth = () => {
 
     function resetToken() {
       // TODO: sent logout to auth api
-      console.log("token reset")
+      console.log('token reset')
       authToken.value = null
       accessToken.value = null
       refreshToken.value = null
     }
 
     return {
-      info, isPhoneVerified, isEmailVerified, updateFeedbackStatus,
-      isLoggedIn, showFeedbackModal,
-      init, setInfo, getToken, setToken, updateToken, resetToken
+      info,
+      isPhoneVerified,
+      isEmailVerified,
+      updateFeedbackStatus,
+      isLoggedIn,
+      showFeedbackModal,
+      init,
+      setInfo,
+      getToken,
+      setToken,
+      updateToken,
+      resetToken,
     }
   })
 
-  const store = innerStore();
+  const store = innerStore()
   store.init()
 
-  return store;
+  return store
 }

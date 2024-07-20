@@ -1,31 +1,25 @@
 import { useStorage } from '@vueuse/core'
-import type { User } from "~/utils/models";
+import type { User } from '~/utils/models'
 
 interface PaymentInterfaces {
-  upis: string[];
-  banks: string[];
-  cards: string[];
+  upis: string[]
+  banks: string[]
+  cards: string[]
 }
 
 // Read
 function getUser(): Promise<User> {
-  return $fetchAPI('/api/user', { method: 'GET' });
-};
+  return $fetchAPI('/api/user', { method: 'GET' })
+}
 // Update
-const updatePreference = useDebounceFn(async (preference:
-  {
-    colorMode?: 'light' | 'dark',
-    payment?: 'upi' | 'bank-transfer' | 'card' | 'cash'
-  }): Promise<Preference> => {
-
-  return await $fetchAPI('/api/user/preference', { method: 'PUT', body: trimObject(preference) });
+const updatePreference = useDebounceFn(async (preference: { colorMode?: 'light' | 'dark'; payment?: 'upi' | 'bank-transfer' | 'card' | 'cash' }): Promise<Preference> => {
+  return await $fetchAPI('/api/user/preference', { method: 'PUT', body: trimObject(preference) })
 }, 1000)
 
 export const useUser = () => {
   const innerStore = defineStore('user', () => {
     // const authStore = useAuth()
     const isInit = ref(false)
-
 
     const name = ref<string>()
     const email = ref<string | null>()
@@ -35,31 +29,29 @@ export const useUser = () => {
     const payment = ref<PaymentInterfaces>({
       upis: [],
       banks: [],
-      cards: []
+      cards: [],
     })
     const a = {
       upis: [],
       banks: [],
-      cards: []
+      cards: [],
     }
     const preference = ref<Preference>({
       colorMode: 'light',
-      payment: "upi",
+      payment: 'upi',
     })
     const $preference = ref<Preference>({
       colorMode: 'light',
-      payment: "upi",
+      payment: 'upi',
     })
 
     async function init() {
-      if (import.meta.server || isInit.value)
-        return
+      if (import.meta.server || isInit.value) return
       isInit.value = true
 
       try {
-        const data = await getUser();
+        const data = await getUser()
         // {id, name, email,phone,gender,dob }
-
 
         name.value = data.name
         email.value = data.email
@@ -69,16 +61,16 @@ export const useUser = () => {
         // payment.value = data.payment
         // preference.value = data.preference
       } catch (error) {
-        console.error("User Store", error);
+        console.error('User Store', error)
       }
     }
 
     function setInfo(user: any) {
-      if ("email" in user) {
+      if ('email' in user) {
         name.value = user.name
         email.value = user.email
       }
-      if ("phone" in user) {
+      if ('phone' in user) {
         phone.value = user.phone
       }
     }
@@ -87,13 +79,12 @@ export const useUser = () => {
       const value = preference.value
       const oldValue = $preference.value
 
-      if (JSON.stringify(value) == JSON.stringify(oldValue))
-        return
+      if (JSON.stringify(value) == JSON.stringify(oldValue)) return
 
       try {
         await updatePreference(value)
       } catch (error) {
-        console.error("Store User", error);
+        console.error('Store User', error)
       }
 
       $preference.value = { ...value }
@@ -101,13 +92,18 @@ export const useUser = () => {
 
     return {
       // ,dob, gender
-      name, email, phone, payment, preference,
-      init, setInfo
+      name,
+      email,
+      phone,
+      payment,
+      preference,
+      init,
+      setInfo,
     }
   })
 
   const store = innerStore()
   store.init()
 
-  return store;
+  return store
 }

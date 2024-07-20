@@ -1,4 +1,4 @@
-import { MaybeComputedRef, MaybeRef } from "@vueuse/shared"
+import type { MaybeComputedRef, MaybeRef } from '@vueuse/shared'
 
 export interface UseCycleFocusOptions<HTMLElement> {
   /**
@@ -18,7 +18,6 @@ export interface UseCycleFocusOptions<HTMLElement> {
    * Custom function to get the index of the current value.
    */
   getIndexOf?: (value: HTMLElement, list: HTMLElement[]) => number
-
 }
 
 /**
@@ -36,12 +35,9 @@ export function useCycleFocus<HTMLElement>(list: MaybeComputedRef<HTMLElement[]>
     get() {
       const targetList = resolveUnref<HTMLElement[]>(list)
 
-      let index = options?.getIndexOf
-        ? options.getIndexOf(state.value, targetList)
-        : targetList.indexOf(state.value)
+      let index = options?.getIndexOf ? options.getIndexOf(state.value, targetList) : targetList.indexOf(state.value)
 
-      if (index < 0)
-        index = options?.fallbackIndex ?? 0
+      if (index < 0) index = options?.fallbackIndex ?? 0
 
       return index
     },
@@ -54,10 +50,9 @@ export function useCycleFocus<HTMLElement>(list: MaybeComputedRef<HTMLElement[]>
     const targetList = listRef.value
     const length = targetList.length
 
-    if (!(i >= 0 && i < length) && !isLoop)
-      return targetList[i]
+    if (!(i >= 0 && i < length) && !isLoop) return targetList[i]
 
-    const index = (i % length + length) % length
+    const index = ((i % length) + length) % length
     const value = targetList[index]
     value.focus()
     state.value = value

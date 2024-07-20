@@ -27,12 +27,12 @@ export default {
     type: 'sum',
     count: 0,
     items: [65, 67, 71, 73, 75, 79, 80, 84, 87, 88, 89, 93, 94, 97, 107, 111],
-    weight: 1
+    weight: 1,
   },
-  "acute-problem": {
+  'acute-problem': {
     type: 'sum',
     count: 0,
     items: [58, 61, 70, 85, 90, 91, 92, 96, 98, 99, 100, 102, 104, 105, 106],
-    weight: 1
-  }
+    weight: 1,
+  },
 }

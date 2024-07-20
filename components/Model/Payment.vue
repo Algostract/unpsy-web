@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { type PurchaseStatus, type SubscribedScale } from '~/utils/models';
+import { type PurchaseStatus, type SubscribedScale } from '~/utils/models'
 
-const props = defineProps<{ isOpen: boolean, selectedScale: string, scales: SubscribedScale[] }>()
+const props = defineProps<{ isOpen: boolean; selectedScale: string; scales: SubscribedScale[] }>()
 const emit = defineEmits<{
   (event: 'close'): void
 }>()
@@ -12,9 +12,9 @@ const tab = ref<'select' | 'payment' | 'complete'>('select')
 const selectedScales = ref(new Set<string>([props.selectedScale]))
 
 const purchaseResponse = ref<{
-  id: string;
-  purchasedAt: string;
-  status: PurchaseStatus;
+  id: string
+  purchasedAt: string
+  status: PurchaseStatus
   qrImage: string
 }>()
 
@@ -37,32 +37,35 @@ function toggle(scale: string) {
 
 function onMassSelect(type: 'select' | 'deselect') {
   props.scales.forEach(({ name }) => {
-    if (type === 'select')
-      selectedScales.value.add(name)
-    else
-      selectedScales.value.delete(name)
+    if (type === 'select') selectedScales.value.add(name)
+    else selectedScales.value.delete(name)
   })
 }
 
-const { resume, pause } = useIntervalFn(async () => {
-  purchaseResponse.value!.status = (await $fetchAPI<{ status: PurchaseStatus }>(`/api/purchase/${purchaseResponse.value?.id}`, {
-    method: 'GET',
-  })).status
+const { resume, pause } = useIntervalFn(
+  async () => {
+    purchaseResponse.value!.status = (
+      await $fetchAPI<{ status: PurchaseStatus }>(`/api/purchase/${purchaseResponse.value?.id}`, {
+        method: 'GET',
+      })
+    ).status
 
-  if (purchaseResponse.value?.status !== 'pending') {
-    tab.value = 'complete'
-    pause()
+    if (purchaseResponse.value?.status !== 'pending') {
+      tab.value = 'complete'
+      pause()
 
-    setTimeout(() => {
-      emit('close')
-    }, 5000)
-  }
-
-}, 3000, { immediate: false })
+      setTimeout(() => {
+        emit('close')
+      }, 5000)
+    }
+  },
+  3000,
+  { immediate: false }
+)
 
 async function onPay() {
   useTrackEvent('pay_init', {
-    scales: Array.from(selectedScales.value.keys())
+    scales: Array.from(selectedScales.value.keys()),
   })
 
   tab.value = 'payment'
@@ -70,8 +73,8 @@ async function onPay() {
   const response = await $fetchAPI('/api/purchase', {
     method: 'POST',
     body: {
-      scales: Array.from(selectedScales.value.keys())
-    }
+      scales: Array.from(selectedScales.value.keys()),
+    },
   })
 
   purchaseResponse.value = response
@@ -81,7 +84,7 @@ async function onPay() {
 
 function onClose() {
   useTrackEvent('model_payment_close', {
-    scales: Array.from(selectedScales.value.keys())
+    scales: Array.from(selectedScales.value.keys()),
   })
 
   emit('close')
@@ -89,44 +92,40 @@ function onClose() {
 </script>
 
 <template>
-  <ModelBase :is-open="isOpen" @close="onClose" id="payment"
-    class="grid grid-rows-[repeat(3,auto)] grid-cols-[repeat(2,auto)] gap-6 w-[500px] h-[375px]">
+  <ModelBase id="payment" :is-open="isOpen" class="grid h-[375px] w-[500px] grid-cols-[repeat(2,auto)] grid-rows-[repeat(3,auto)] gap-6" @close="onClose">
     <!-- Select Tab -->
     <template v-if="tab === 'select'">
-      <h6 class="row-start-1 col-start-1 text-lg">Choose Scales to Recharge</h6>
-      <div class="row-start-2 col-start-1 flex gap-3 flex-wrap">
-        <BaseChips v-for="{ name, monthlyPrice } in scales" :title="`${name} - ₹${monthlyPrice}`"
-          class="!px-4 !py-1 cursor-pointer" :class="{ 'bg-primary-400': selectedScales.has(name) }"
+      <h6 class="col-start-1 row-start-1 text-lg">Choose Scales to Recharge</h6>
+      <div class="col-start-1 row-start-2 flex flex-wrap gap-3">
+        <BaseChips
+          v-for="{ name, monthlyPrice } in scales"
+          :title="`${name} - ₹${monthlyPrice}`"
+          class="cursor-pointer !px-4 !py-1"
+          :class="{ 'bg-primary-400': selectedScales.has(name) }"
           @click="toggle(name)" />
       </div>
-      <div class="relative row-start-2 col-start-2 flex flex-col gap-3">
-        <BaseButton size="M" :rounded="true" title="Select All" class="!py-1 !w-full" @click="onMassSelect('select')" />
-        <BaseButton size="M" :rounded="true" title="Deselect All" class="!py-1 !w-full !bg-dark-400"
-          @click="onMassSelect('deselect')" />
+      <div class="relative col-start-2 row-start-2 flex flex-col gap-3">
+        <BaseButton size="M" :rounded="true" title="Select All" class="!w-full !py-1" @click="onMassSelect('select')" />
+        <BaseButton size="M" :rounded="true" title="Deselect All" class="!w-full !bg-dark-400 !py-1" @click="onMassSelect('deselect')" />
       </div>
-      <div class="row-start-3 col-start-1 flex flex-col p-3 rounded-lg w-[175px] h-[159px] bg-primary-400">
+      <div class="col-start-1 row-start-3 flex h-[159px] w-[175px] flex-col rounded-lg bg-primary-400 p-3">
         <span class="text-xl">₹ {{ totalPrice }}</span>
         <span class="text-sm">30 days</span>
       </div>
-      <BaseButton size="M" :rounded="true" title="Pay Now"
-        class="self-end justify-self-end row-start-3 col-start-2 !py-1 h-fit" @click="onPay" :disabled="!totalPrice" />
+      <BaseButton size="M" :rounded="true" title="Pay Now" class="col-start-2 row-start-3 h-fit self-end justify-self-end !py-1" :disabled="!totalPrice" @click="onPay" />
     </template>
     <!-- Payment Tab -->
-    <div v-else-if="tab === 'payment'"
-      class="row-start-1 row-span-full col-start-1 col-span-full justify-self-center self-center flex flex-col gap-6 justify-center items-center p-4 pb-8">
+    <div v-else-if="tab === 'payment'" class="col-span-full col-start-1 row-span-full row-start-1 flex flex-col items-center justify-center gap-6 self-center justify-self-center p-4 pb-8">
       <h6 class="mx-auto text-lg">Scan to Pay</h6>
-      <div class="flex justify-center items-center mx-auto p-2 w-[240px] h-[240px] rounded-md"
-        :class="{ 'bg-white': !isLoading }">
+      <div class="mx-auto flex h-[240px] w-[240px] items-center justify-center rounded-md p-2" :class="{ 'bg-white': !isLoading }">
         <NuxtIcon v-if="isLoading" name="loader" class="text-[36px]" />
-        <img v-else :src="purchaseResponse?.qrImage" alt="qr" class="w-full h-full" />
+        <img v-else :src="purchaseResponse?.qrImage" alt="qr" class="h-full w-full" />
       </div>
     </div>
     <!-- Complete Tab -->
-    <div v-else
-      class="row-start-1 row-span-full col-start-1 col-span-full justify-self-center self-center flex flex-col gap-6 justify-center items-center p-4 pb-8">
-      <div v-if="!!purchaseResponse" class="row-start-1 row-span-2 col-start-1 col-span-2 self-center p-4 mx-auto">
-        <svg v-if="purchaseResponse.status == 'failed'" width="128" height="128" viewBox="0 0 96 96" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+    <div v-else class="col-span-full col-start-1 row-span-full row-start-1 flex flex-col items-center justify-center gap-6 self-center justify-self-center p-4 pb-8">
+      <div v-if="!!purchaseResponse" class="col-span-2 col-start-1 row-span-2 row-start-1 mx-auto self-center p-4">
+        <svg v-if="purchaseResponse.status == 'failed'" width="128" height="128" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M85.7073 48.0461C85.7073 69.0584 68.7597 86.0922 47.8537 86.0922C26.9477 86.0922 10 69.0584 10 48.0461C10 27.0338 26.9477 10 47.8537 10C68.7597 10 85.7073 27.0338 85.7073 48.0461ZM14.5424 48.0461C14.5424 66.5369 29.4564 81.5266 47.8537 81.5266C66.2509 81.5266 81.1649 66.5369 81.1649 48.0461C81.1649 29.5553 66.2509 14.5655 47.8537 14.5655C29.4564 14.5655 14.5424 29.5553 14.5424 48.0461Z"
             fill="#E11D48" />
@@ -143,9 +142,7 @@ function onClose() {
             fill="#3B82F6" />
         </svg>
       </div>
-      <span class="row-start-3 col-start-1 col-span-2 mx-auto text-lg">
-        Payment {{ purchaseResponse?.status == 'success' ? 'Successful' : 'Failed' }}
-      </span>
+      <span class="col-span-2 col-start-1 row-start-3 mx-auto text-lg"> Payment {{ purchaseResponse?.status == 'success' ? 'Successful' : 'Failed' }} </span>
     </div>
   </ModelBase>
 </template>

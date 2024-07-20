@@ -1,13 +1,13 @@
 import { Client } from '@notionhq/client'
 
 interface Request {
-  name: string,
-  email: string,
-  phone: string,
-  helpful: boolean,
-  accuracy: boolean,
-  interested: boolean,
-  recommend: boolean,
+  name: string
+  email: string
+  phone: string
+  helpful: boolean
+  accuracy: boolean
+  interested: boolean
+  recommend: boolean
   suggestion: string
 }
 
@@ -25,7 +25,7 @@ export default defineProtectedEventHandler(async (event, userId) => {
         database_id: config.private.notionDBId,
       },
       properties: {
-        'ID': {
+        ID: {
           type: 'rich_text',
           rich_text: [
             {
@@ -36,16 +36,16 @@ export default defineProtectedEventHandler(async (event, userId) => {
                 strikethrough: false,
                 underline: false,
                 code: false,
-                color: 'default'
+                color: 'default',
               },
               text: {
                 content: userId,
-                link: null
+                link: null,
               },
             },
           ],
         },
-        'Name': {
+        Name: {
           type: 'title',
           title: [
             {
@@ -56,23 +56,27 @@ export default defineProtectedEventHandler(async (event, userId) => {
             },
           ],
         },
-        'Email': {
+        Email: {
           type: 'email',
-          email: email
+          email: email,
         },
         Phone: {
           type: 'phone_number',
-          phone_number: phone
+          phone_number: phone,
         },
         Helpful: {
           checkbox: helpful,
-        }, Accuracy: {
+        },
+        Accuracy: {
           checkbox: accuracy,
-        }, Interested: {
+        },
+        Interested: {
           checkbox: interested,
-        }, Recommend: {
+        },
+        Recommend: {
           checkbox: recommend,
-        }, Suggestion: {
+        },
+        Suggestion: {
           type: 'rich_text',
           rich_text: [
             {
@@ -83,15 +87,15 @@ export default defineProtectedEventHandler(async (event, userId) => {
                 strikethrough: false,
                 underline: false,
                 code: false,
-                color: 'default'
+                color: 'default',
               },
               text: {
                 content: suggestion,
-                link: null
+                link: null,
               },
             },
           ],
-        }
+        },
       },
     })
 

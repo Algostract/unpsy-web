@@ -1,7 +1,7 @@
-import { useAuth } from "~~/stores/auth";
+import { useAuth } from '~~/stores/auth'
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (process.server) return
+  if (import.meta.server) return
 
   const authStore = useAuth()
   // const authStore = { isLoggedIn: true }

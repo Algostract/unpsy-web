@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client"
-import { type ScaleType, type SubscribedScale } from "~/utils/models"
-import { dataScales } from "~/server/utils/data"
+import { PrismaClient } from '@prisma/client'
+import { type ScaleType, type SubscribedScale } from '~/utils/models'
+import { dataScales } from '~/server/utils/data'
 
 const prisma = new PrismaClient()
 
@@ -29,11 +29,11 @@ export default defineEventHandler<Promise<SubscribedScale[]>>(async () => {
         monthlyPrice,
         // expiresAt: subscribedScale?.expiresAt.toISOString() ?? null,
         updatedAt: updatedAt,
-        publishedAt: publishedAt
+        publishedAt: publishedAt,
       }
     })
   } catch (error: any) {
-    console.error("API scale/index GET", error)
+    console.error('API scale/index GET', error)
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

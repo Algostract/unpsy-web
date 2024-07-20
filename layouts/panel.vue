@@ -23,15 +23,13 @@ function onHelp() {
 </script>
 
 <template>
-  <div class="flex flex-col-reverse sm:flex-row sm:gap-5 w-screen h-screen">
-    <BaseButton icon="question" size="M" title="Need Help"
-      class="fixed top-3 right-0 md:right-2 scale-75 md:scale-95 z-10" @click="onHelp" />
+  <div class="flex h-screen w-screen flex-col-reverse sm:flex-row sm:gap-5">
+    <BaseButton icon="question" size="M" title="Need Help" class="fixed right-0 top-3 z-10 scale-75 md:right-2 md:scale-95" @click="onHelp" />
     <!-- Navbar -->
-    <NavBar :is-transition="isTransition" :route="(route.name?.toString() as 'dashboard' | 'feedbacks')" />
-    <div class="flex-grow py-8 px-4 sm:pl-0 overflow-y-auto">
+    <NavBar :is-transition="isTransition" :route="route.name?.toString() as 'dashboard' | 'feedbacks'" />
+    <div class="flex-grow overflow-y-auto px-4 py-8 sm:pl-0">
       <slot />
     </div>
-    <ModelFeedback v-if="authStore.showFeedbackModal" :is-open="authStore.showFeedbackModal"
-      @close="authStore.updateFeedbackStatus('submitted')" />
+    <ModelFeedback v-if="authStore.showFeedbackModal" :is-open="authStore.showFeedbackModal" @close="authStore.updateFeedbackStatus('submitted')" />
   </div>
 </template>

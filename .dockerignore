@@ -1,3 +1,10 @@
+.vs
+.vscode
+
+.changeset
+.git
+.github
+
 # Nuxt dev/build outputs
 .output
 .nuxt
@@ -19,11 +26,9 @@ logs
 
 # Local env files
 .env*
-!.env.example
 
-database
-prisma/data/*
-!prisma/data/.gitkeep
+.dockerignore
+Dockerfile
 
-assets/documents/*
-!assets/documents/.gitkeep
+# Static Files
+static

@@ -231,6 +231,6 @@ export default {
     anxiety: 10,
     depression: 0,
     autism: 6,
-    "acute-problem": 1,
+    'acute-problem': 1,
   },
 }

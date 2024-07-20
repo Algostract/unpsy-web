@@ -1,33 +1,33 @@
-import { PrismaClient } from "@prisma/client"
-import { createUPIPayment } from "~~/server/utils/payment";
-import { type PurchaseStatus, DBScaleNameToScaleName } from "~/utils/models";
+import { PrismaClient } from '@prisma/client'
+import { createUPIPayment } from '~~/server/utils/payment'
+import { type PurchaseStatus, DBScaleNameToScaleName } from '~/utils/models'
 import { renderSVG as generateQR } from 'uqr'
 
 const prisma = new PrismaClient()
 
 export default defineProtectedEventHandler<{
-  id: string;
-  purchasedAt: string;
-  status: PurchaseStatus;
-  qrImage: string;
+  id: string
+  purchasedAt: string
+  status: PurchaseStatus
+  qrImage: string
 }>(async (event, userId) => {
   try {
     const { scales: purchasedScales } = await readBody<{ scales: string[] }>(event)
 
-    if (purchasedScales.length === 0)
-      throw createError({ statusCode: 400, statusMessage: "Select at least a Scale" })
+    if (purchasedScales.length === 0) throw createError({ statusCode: 400, statusMessage: 'Select at least a Scale' })
 
-    const allScales = (await prisma.scale.findMany({
-      select: {
-        name: true,
-        monthlyPrice: true,
-      }
-    })).filter(({ name }) => purchasedScales.includes(DBScaleNameToScaleName[name]))
+    const allScales = (
+      await prisma.scale.findMany({
+        select: {
+          name: true,
+          monthlyPrice: true,
+        },
+      })
+    ).filter(({ name }) => purchasedScales.includes(DBScaleNameToScaleName[name]))
 
     const duration = 30
 
-    if (allScales.length === 0)
-      throw createError({ statusCode: 404, statusMessage: "Select at least a valid Scale" })
+    if (allScales.length === 0) throw createError({ statusCode: 404, statusMessage: 'Select at least a valid Scale' })
 
     const purchase = await prisma.purchase.create({
       data: {
@@ -37,8 +37,8 @@ export default defineProtectedEventHandler<{
             data: allScales.map(({ name, monthlyPrice }) => ({
               name,
               duration,
-              monthlyPrice
-            }))
+              monthlyPrice,
+            })),
           },
         },
       },
@@ -48,25 +48,26 @@ export default defineProtectedEventHandler<{
         purchasedAt: true,
         user: {
           select: {
-            phone: true
-          }
-        }, scales: {
+            phone: true,
+          },
+        },
+        scales: {
           select: {
             duration: true,
-            monthlyPrice: true
-          }
-        }
-      }
+            monthlyPrice: true,
+          },
+        },
+      },
     })
 
-    const totalPrice = purchase.scales.reduce((total, { monthlyPrice, duration },) => total + (monthlyPrice / 30) * duration, 0)
+    const totalPrice = purchase.scales.reduce((total, { monthlyPrice, duration }) => total + (monthlyPrice / 30) * duration, 0)
 
     const gatewayResult = await createUPIPayment({
       transactionId: purchase.id,
       // @ts-ignore
       amount: totalPrice,
       phone: purchase.user.phone,
-      type: "qr",
+      type: 'qr',
     })
 
     return {
@@ -77,12 +78,10 @@ export default defineProtectedEventHandler<{
       qrImage: generateQR(gatewayResult.intentUrl as string),
     }
   } catch (error: any) {
-    console.error("API purchase/index POST", error)
+    console.error('API purchase/index POST', error)
 
-    if (error.statusCode === 400)
-      throw error
-    else if (error.statusCode === 404)
-      throw error
+    if (error.statusCode === 400) throw error
+    else if (error.statusCode === 404) throw error
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

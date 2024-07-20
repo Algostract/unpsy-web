@@ -1,27 +1,29 @@
 <script setup lang="ts">
 const props = defineProps<{
-  name: string,
-  content: string,
-  selected: boolean,
+  name: string
+  content: string
+  selected: boolean
 }>()
 const emit = defineEmits<{
   (event: 'update:value', value: string | undefined): void
 }>()
 
-const value = ref(props.selected);
+const value = ref(props.selected)
 const propsUpdated = ref(false)
 
-watch(() => props.selected, () => {
-  value.value = props.selected
-  propsUpdated.value = true
-})
+watch(
+  () => props.selected,
+  () => {
+    value.value = props.selected
+    propsUpdated.value = true
+  }
+)
 
 watch(value, () => {
-  if (!propsUpdated.value)
-    emit('update:value', props.content);
+  if (!propsUpdated.value) emit('update:value', props.content)
 
   propsUpdated.value = false
-});
+})
 </script>
 
 <template>
@@ -34,23 +36,19 @@ watch(value, () => {
         <circle cx="14" cy="14" :r="selected ? 5.25 : 8" class="fill-white dark:fill-dark-600" />
       </g>
       <defs>
-        <filter id="outer_layer" x="2.00012" y="2" width="24" height="24" filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB">
+        <filter id="outer_layer" x="2.00012" y="2" width="24" height="24" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha" />
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
           <feOffset />
           <feGaussianBlur stdDeviation="1" />
           <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
           <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.375 0" />
           <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2480_8220" />
         </filter>
-        <filter id="inner_layer" x="4.74988" y="4.75" width="18.5" height="18.5" filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB">
+        <filter id="inner_layer" x="4.74988" y="4.75" width="18.5" height="18.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha" />
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
           <feOffset />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="out" />
@@ -60,7 +58,6 @@ watch(value, () => {
         </filter>
       </defs>
     </svg>
-    <input type="radio" :name="name" :value="content" v-model="value"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 cursor-pointer" />
+    <input v-model="value" type="radio" :name="name" :value="content" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer opacity-0" />
   </span>
 </template>

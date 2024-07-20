@@ -2,34 +2,19 @@
 const title = `Psy - Psychological Assessment Toolkit`
 const description = `A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. 
 It includes various assessments scales like EPQ, MACI, MCMI, TCI, JEPQ.`
-const url = "https://psy.monalisa-bairagi.com"
+const url = 'https://psy.monalisa-bairagi.com'
 
 useHead({
   titleTemplate: (titleChunk) => (titleChunk ? `Psy - ${titleChunk}` : 'Psy'),
-  link: [
-    {
-      rel: 'preconnect',
-      href: 'https://fonts.gstatic.com',
-      crossorigin: 'anonymous',
-    },
-    {
-      rel: 'preconnect',
-      href: 'https://fonts.googleapis.com'
-    },
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;1,400&family=Poppins:wght@300;400;500&display=swap",
-    },
-  ],
 })
 
 useSeoMeta({
-  ogType: "website",
+  ogType: 'website',
   ogImageWidth: 1280,
   ogImageHeight: 720,
   fbAppId: 966242223397117,
-  twitterCard: "summary_large_image",
-  colorScheme: "dark light",
+  twitterCard: 'summary_large_image',
+  colorScheme: 'dark light',
 })
 
 useSchemaOrg([
@@ -47,7 +32,9 @@ useSchemaOrg([
 </script>
 
 <template>
+  <NuxtRouteAnnouncer />
   <NuxtPwaManifest />
+  <NuxtPwaAssets />
   <!-- <NuxtLoadingIndicator /> -->
   <NuxtLayout>
     <NuxtPage />
@@ -71,7 +58,7 @@ useSchemaOrg([
 }
 
 *::-webkit-scrollbar {
-  @apply block w-[6px] bg-light-500 dark:bg-dark-400;
+  @apply block size-[6px] bg-light-500 dark:bg-dark-400;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -79,14 +66,14 @@ useSchemaOrg([
 }
 
 html {
-  @apply relative scroll-smooth overflow-x-hidden;
+  @apply relative overflow-x-hidden scroll-smooth;
 }
 
 body {
-  @apply relative min-h-screen overflow-hidden text-black dark:text-white font-body bg-white dark:bg-dark-400;
+  @apply relative min-h-screen overflow-hidden bg-white font-body text-black dark:bg-dark-400 dark:text-white;
 }
 
-.nuxt-icon>svg {
+.nuxt-icon > svg {
   @apply !m-0;
 }
 

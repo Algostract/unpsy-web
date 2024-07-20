@@ -100,10 +100,10 @@ export default {
     oc: 2.4,
     interpersonal: 2.67,
     phobia: 2.14,
-    "paranoid-ideation": 2.33,
+    'paranoid-ideation': 2.33,
     raw: 198,
     pst: 69,
     psdi: 2.87,
-    gsi: 2.2
+    gsi: 2.2,
   },
-};
+}

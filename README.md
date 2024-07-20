@@ -3,6 +3,7 @@
 <p>
 
 # Psy
+
 > A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. Explore the depths of psychology with ease.
 
 <p align="center">
@@ -14,23 +15,23 @@
 ![Landing](public/previews/landing.webp)
 
 # Scales
-| Scale   | Created | Tested | Published |
-|---------|---------|--------|-----------|
-| EPQ     |   ✓     |   ✓    |     ✓     |
-| EPQ-R   |   ✓     |   ✓    |     ✓     |
-| JTCI    |   ✓     |   ✓    |     ✓     |
-| MACI    |   ✓     |   ✓    |     ✓     |
-| MCMI    |   ✓     |   ✓    |     ✓     |
-| MMPI-RF |   ✓     |   ✓    |     ✓     |
-| MPQ     |   ✓     |   ✓    |     ✓     |
-| TCI     |   ✓     |   ✓    |     ✓     |
-| SCL-90R |   ✓     |   ✓    |     ✓     |
-| DSMD-A  |   ✓     |   ✓    |     ✓     |
-| DSMD-C  |   ✓     |   ✓    |     ✓     |
-| JEPQ    |   -     |   -    |     -     |
-| LEYTON  |   -     |   -    |     -     |
-| BAI     |   -     |   -    |     -     |
 
+| Scale   | Created | Tested | Published |
+| ------- | ------- | ------ | --------- |
+| EPQ     | ✓       | ✓      | ✓         |
+| EPQ-R   | ✓       | ✓      | ✓         |
+| JTCI    | ✓       | ✓      | ✓         |
+| MACI    | ✓       | ✓      | ✓         |
+| MCMI    | ✓       | ✓      | ✓         |
+| MMPI-RF | ✓       | ✓      | ✓         |
+| MPQ     | ✓       | ✓      | ✓         |
+| TCI     | ✓       | ✓      | ✓         |
+| SCL-90R | ✓       | ✓      | ✓         |
+| DSMD-A  | ✓       | ✓      | ✓         |
+| DSMD-C  | ✓       | ✓      | ✓         |
+| JEPQ    | -       | -      | -         |
+| LEYTON  | -       | -      | -         |
+| BAI     | -       | -      | -         |
 
 ## Todos
 
@@ -42,6 +43,7 @@
 - Add Beck Anxiety Inventory
 
 ## Keywords
+
 - psychology tool - 3,600
 - beck anxiety inventory scoring - 720
 - free psychological assessment tools list - 210

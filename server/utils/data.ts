@@ -1,17 +1,17 @@
-import type { ScaleName } from '~/utils/models';
+import type { ScaleName } from '~/utils/models'
 
 interface Scale {
-  name: ScaleName;
-  type: 'binary' | 'pentanary';
-  count: number;
-  monthlyPrice: number;
-  subScales: string[];
+  name: ScaleName
+  type: 'binary' | 'pentanary'
+  count: number
+  monthlyPrice: number
+  subScales: string[]
   options: {
-    name: string;
-    value: number;
-  }[];
-  publishedAt: string,
-  updatedAt: string,
+    name: string
+    value: number
+  }[]
+  publishedAt: string
+  updatedAt: string
 }
 
 const scales: Scale[] = [
@@ -26,7 +26,7 @@ const scales: Scale[] = [
       { name: 'True', value: 1 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   {
     name: 'EPQ-R',
@@ -39,7 +39,7 @@ const scales: Scale[] = [
       { name: 'True', value: 1 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   /* {
   name: "JEPQ",
@@ -50,23 +50,13 @@ const scales: Scale[] = [
     type: 'binary',
     count: 108,
     monthlyPrice: 21,
-    subScales: [
-      'novelty-seeking',
-      'harm-avoidance',
-      'reward-dependence',
-      'persistence',
-      'self-directedness',
-      'cooperativeness',
-      'self-transcendence-(1)',
-      'self-transcendence-(2)',
-      'validity',
-    ],
+    subScales: ['novelty-seeking', 'harm-avoidance', 'reward-dependence', 'persistence', 'self-directedness', 'cooperativeness', 'self-transcendence-(1)', 'self-transcendence-(2)', 'validity'],
     options: [
       { name: 'False', value: 0 },
       { name: 'True', value: 1 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   /*  {
      name: 'MACI',
@@ -222,67 +212,33 @@ const scales: Scale[] = [
     type: 'binary',
     count: 100,
     monthlyPrice: 20,
-    subScales: [
-      'anxiety',
-      'hysteria',
-      'paranoia',
-      'mania',
-      'depression',
-      'schizophrenia',
-      'repressive-sensitization',
-      'personality-disorder',
-      'k-(lie)',
-    ],
+    subScales: ['anxiety', 'hysteria', 'paranoia', 'mania', 'depression', 'schizophrenia', 'repressive-sensitization', 'personality-disorder', 'k-(lie)'],
     options: [
       { name: 'False', value: 0 },
       { name: 'True', value: 1 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   {
     name: 'TCI',
     type: 'binary',
     count: 240,
     monthlyPrice: 48,
-    subScales: [
-      'novelty-seeking',
-      'harm-avoidance',
-      'reward-dependence',
-      'persistance',
-      'self-directedness',
-      'cooperativeness',
-      'self-transcendence',
-      'numb',
-      'run',
-    ],
+    subScales: ['novelty-seeking', 'harm-avoidance', 'reward-dependence', 'persistance', 'self-directedness', 'cooperativeness', 'self-transcendence', 'numb', 'run'],
     options: [
       { name: 'False', value: 0 },
       { name: 'True', value: 1 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   {
     name: 'SCL-90R',
     type: 'pentanary',
     count: 90,
     monthlyPrice: 27,
-    subScales: [
-      'somalization',
-      'psychoticism',
-      'hostility',
-      'depression',
-      'anxiety',
-      'oc',
-      'interpersonal',
-      'phobia',
-      'paranoid-ideation',
-      'raw',
-      'pst',
-      'psdi',
-      'gsi'
-    ],
+    subScales: ['somalization', 'psychoticism', 'hostility', 'depression', 'anxiety', 'oc', 'interpersonal', 'phobia', 'paranoid-ideation', 'raw', 'pst', 'psdi', 'gsi'],
     options: [
       { name: '0', value: 0 },
       { name: '1', value: 1 },
@@ -291,21 +247,14 @@ const scales: Scale[] = [
       { name: '4', value: 4 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   {
     name: 'DSMD-A',
     type: 'pentanary',
     count: 110,
     monthlyPrice: 33,
-    subScales: [
-      'conduct',
-      'delinquency',
-      'anxiety',
-      'depression',
-      'autism',
-      'acute-problem',
-    ],
+    subScales: ['conduct', 'delinquency', 'anxiety', 'depression', 'autism', 'acute-problem'],
     options: [
       { name: 'N', value: 0 },
       { name: 'R', value: 1 },
@@ -314,21 +263,14 @@ const scales: Scale[] = [
       { name: 'VF', value: 4 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
   {
     name: 'DSMD-C',
     type: 'pentanary',
     count: 111,
     monthlyPrice: 33,
-    subScales: [
-      'conduct',
-      'attention',
-      'anxiety',
-      'depression',
-      'autism',
-      'acute-problem',
-    ],
+    subScales: ['conduct', 'attention', 'anxiety', 'depression', 'autism', 'acute-problem'],
     options: [
       { name: 'N', value: 0 },
       { name: 'R', value: 1 },
@@ -337,8 +279,8 @@ const scales: Scale[] = [
       { name: 'VF', value: 4 },
     ],
     publishedAt: '2024-02-23T14:08:44.658Z',
-    updatedAt: '2024-02-23T14:08:44.658Z'
+    updatedAt: '2024-02-23T14:08:44.658Z',
   },
-];
+]
 
-export { scales as dataScales };
+export { scales as dataScales }

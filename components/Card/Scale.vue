@@ -2,26 +2,26 @@
 // import { Scale } from 'utils/models';
 
 interface Scale {
-  name: string;
+  name: string
   type: 'binary' | 'pentanary'
-  count: number;
-  subScales: string[];
-  updatedAt: string;
-  publishedAt: string;
+  count: number
+  subScales: string[]
+  updatedAt: string
+  publishedAt: string
 }
 
 const props = defineProps<Scale>()
 const emit = defineEmits<{
-  (event: 'openTest'): void,
+  (event: 'openTest'): void
   (event: 'openPayment'): void
 }>()
 
 const updatedIn = useTimeAgo(() => props.updatedAt, {
   messages: {
     invalid: 'Invalid Date',
-    past: (n: any) => n.match(/\d/) ? `Updated ${n} ago` : n,
+    past: (n: any) => (n.match(/\d/) ? `Updated ${n} ago` : n),
     justNow: 'Just Now',
-    future: (n: any) => n.match(/\d/) ? `Next Update In ${n}` : n,
+    future: (n: any) => (n.match(/\d/) ? `Next Update In ${n}` : n),
     year: (n: number) => `${n} year${n > 1 ? 's' : ''}`,
     month: (n: number) => `${n} month${n > 1 ? 's' : ''}`,
     week: (n: number) => `${n} week${n > 1 ? 's' : ''}`,
@@ -29,29 +29,24 @@ const updatedIn = useTimeAgo(() => props.updatedAt, {
     hour: (n: number) => `${n} hour${n > 1 ? 's' : ''}`,
     minute: (n: number) => `${n} min`,
     second: (n: number) => `${n} sec`,
-  }
+  },
 })
 
 function messageColor(date: string | Date | null) {
-  if (date === null)
-    return 'text-alert-400'
+  if (date === null) return 'text-alert-400'
 
-  if (typeof date === 'string')
-    date = new Date(date)
+  if (typeof date === 'string') date = new Date(date)
 
   const deltaHour = (date.getTime() - new Date().getTime()) / (1000 * 60 * 60)
 
-  if (deltaHour < 24)
-    return 'text-alert-400'
-  else if (deltaHour < 72)
-    return 'text-warning-400'
-  else
-    return 'text-primary-400'
+  if (deltaHour < 24) return 'text-alert-400'
+  else if (deltaHour < 72) return 'text-warning-400'
+  else return 'text-primary-400'
 }
 
 function onOpenTest() {
   useTrackEvent('model_test_open', {
-    scale: props.name
+    scale: props.name,
   })
   emit('openTest')
 }
@@ -62,7 +57,7 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
 <template>
   <div>
     <div
-      class="relative grid gap-y-3 grid-rows-[repeat(2,min-content)_1fr_min-content] grid-cols-[repeat(2,auto)] mx-auto rounded-2xl p-4 w-full min-w-[272px] md:max-w-[300px] max-h-[300px] md:max-h-[500px] aspect-square bg-light-500 dark:bg-dark-500">
+      class="relative mx-auto grid aspect-square max-h-[300px] w-full min-w-[272px] grid-cols-[repeat(2,auto)] grid-rows-[repeat(2,min-content)_1fr_min-content] gap-y-3 rounded-2xl bg-light-500 p-4 dark:bg-dark-500 md:max-h-[500px] md:max-w-[300px]">
       <!--  <div class="self-start justify-self-end flex gap-2 items-center row-start-1 col-start-2 col-span-1 w-fit h-fit">
         <BaseChips :title="!!expiresAt ? expiresIn : 'Recharge'" :class="messageColor(expiresAt)" class="cursor-pointer"
           @click="emit('openPayment')" />
@@ -70,22 +65,20 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
       </div> -->
       <h6 class="col-start-1 h-fit text-lg">{{ name }}</h6>
       <BaseRibbon :title="isRecentlyPublished ? 'new' : null" class="absolute -right-[5px] top-14 bg-dark-400" />
-      <div class="col-start-1 col-span-2 flex gap-2 h-fit text-xs opacity-50">
+      <div class="col-span-2 col-start-1 flex h-fit gap-2 text-xs opacity-50">
         <span>Sub Scales {{ subScales.length }}</span>
-        <span>&#x2022</span>
+        <span>&#x2022;</span>
         <span class="capitalize">{{ type }}</span>
-        <span>&#x2022</span>
+        <span>&#x2022;</span>
         <span>Item {{ count }}</span>
       </div>
-      <div class="relative col-start-1 col-span-2 h-full">
-        <div class="flex flex-wrap gap-2 max-h-[128px] overflow-y-auto">
-          <BaseChips v-for="subScale in subScales" :key="subScale" :title="subScale.replaceAll('-', ' ')"
-            class="capitalize cursor-text" />
+      <div class="relative col-span-2 col-start-1 h-full">
+        <div class="flex max-h-[128px] flex-wrap gap-2 overflow-y-auto">
+          <BaseChips v-for="subScale in subScales" :key="subScale" :title="subScale.replaceAll('-', ' ')" class="cursor-text capitalize" />
         </div>
       </div>
-      <span class="row-start-4 col-start-1 col-span-2 self-center w-fit text-xs opacity-50">{{ updatedIn }}</span>
-      <BaseButton class="row-start-4 col-start-2 justify-self-end self-end hover:bg-primary-400" size="S"
-        :rounded="true" icon="keyboard" title="Start" @click="onOpenTest" />
+      <span class="col-span-2 col-start-1 row-start-4 w-fit self-center text-xs opacity-50">{{ updatedIn }}</span>
+      <BaseButton class="col-start-2 row-start-4 self-end justify-self-end hover:bg-primary-400" size="S" :rounded="true" icon="keyboard" title="Start" @click="onOpenTest" />
     </div>
   </div>
 </template>

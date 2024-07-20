@@ -1,7 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
+    '@nuxt/eslint',
+    '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/test-utils',
     '@nuxtjs/color-mode',
@@ -13,6 +16,7 @@ export default defineNuxtConfig({
     'nuxt-gtag',
     'nuxt-icons',
   ],
+
   /*  routeRules: {
      '/': { redirect: '/dashboard' }
    }, */
@@ -31,23 +35,27 @@ export default defineNuxtConfig({
       paymentUserId: '',
       paymentSecret: '',
       notionKey: '',
-      notionDBId: ''
+      notionDBId: '',
     },
   },
+
   image: {
     format: ['avif', 'webp'],
     width: 1024,
     quality: 80,
   },
+
   colorMode: {
     preference: 'system',
     fallback: 'light',
     classSuffix: '',
   },
+
   site: {
     name: 'Psy',
     url: 'https://psy.monalisa-bairagi.com',
   },
+
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
@@ -84,85 +92,85 @@ export default defineNuxtConfig({
           src: '/pwa/icon-48.png',
           sizes: '48x48',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-72.png',
           sizes: '72x72',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-96.png',
           sizes: '96x96',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-128.png',
           sizes: '128x128',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-192.png',
           sizes: '192x192',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-384.png',
           sizes: '384x384',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-512.png',
           sizes: '512x512',
           type: 'image/png',
-          purpose: 'any'
+          purpose: 'any',
         },
         {
           src: '/pwa/icon-maskable-48.png',
           sizes: '48x48',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-72.png',
           sizes: '72x72',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-96.png',
           sizes: '96x96',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-128.png',
           sizes: '128x128',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-192.png',
           sizes: '192x192',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-384.png',
           sizes: '384x384',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
         {
           src: '/pwa/icon-maskable-512.png',
           sizes: '512x512',
           type: 'image/png',
-          purpose: 'maskable'
+          purpose: 'maskable',
         },
       ],
       screenshots: [
@@ -171,7 +179,7 @@ export default defineNuxtConfig({
           sizes: '1024x576',
           type: 'image/webp',
           form_factor: 'wide',
-          label: 'Screenshot 1'
+          label: 'Screenshot 1',
         },
         /* {
           src: '/pwa/screenshot-desktop-2.webp',
@@ -192,7 +200,7 @@ export default defineNuxtConfig({
           sizes: '576x1024',
           type: 'image/webp',
           form_factor: 'narrow',
-          label: 'Screenshot 1'
+          label: 'Screenshot 1',
         },
         /* {
           src: '/pwa/screenshot-mobile-2.webp',
@@ -208,7 +216,7 @@ export default defineNuxtConfig({
           form_factor: 'narrow',
           label: 'Screenshot 3'
         }, */
-      ]
+      ],
     },
     workbox: {
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
@@ -224,7 +232,10 @@ export default defineNuxtConfig({
       type: 'module',
     },
   },
+
   gtag: {
-    id: 'G-YPSNKTWEYP'
-  }
+    id: 'G-YPSNKTWEYP',
+  },
+
+  compatibilityDate: '2024-07-20',
 })
