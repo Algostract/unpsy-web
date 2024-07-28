@@ -1,5 +1,11 @@
 # psy
 
+## 0.6.2
+
+### Patch Changes
+
+- f63dc5d: chore: housekeeping, moved prisma to lib, other scales opened
+
 ## 0.6.1
 
 ### Patch Changes
