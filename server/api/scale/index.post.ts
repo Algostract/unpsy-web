@@ -1,8 +1,7 @@
-import { PrismaClient, ReportStatus } from '@prisma/client'
+import prisma from '~/lib/prisma'
+import { ReportStatus } from '@prisma/client'
 import { type ScaleName, ScaleNameToDBScaleName } from '~/utils/models'
 import { dataScales } from '~/server/utils/data'
-
-const prisma = new PrismaClient()
 
 export default defineProtectedEventHandler<{ name: string; value: number }[]>(async (event, userId) => {
   try {

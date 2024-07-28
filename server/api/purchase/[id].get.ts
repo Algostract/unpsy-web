@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import { type PurchaseStatus } from '~/utils/models'
-
-const prisma = new PrismaClient()
 
 export default defineProtectedEventHandler<{ status: PurchaseStatus }>(async (event, userId) => {
   const id = getRouterParam(event, 'id') ?? ''

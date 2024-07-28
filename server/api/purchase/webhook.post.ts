@@ -1,8 +1,7 @@
-import { PurchaseStatus, PrismaClient } from '@prisma/client'
+import { PurchaseStatus } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import { addTimeToDate, addTimeToNow, validateChecksum } from '~~/server/utils/helpers'
 import { isExpired } from '~~/utils/helpers'
-
-const prisma = new PrismaClient()
 
 interface PaymentData {
   merchantId: string

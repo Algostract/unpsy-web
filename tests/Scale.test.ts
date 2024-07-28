@@ -17,7 +17,7 @@ describe('Binary Scale Test', () => {
   })
 
   test('MCMI Scale Test', () => {
-    const scale = 'MCMI'
+    const scale = 'MCMI-3'
     expect(BinaryCalculate(scale, Data[scale].responses)).toMatchObject(Data[scale].result)
   })
 

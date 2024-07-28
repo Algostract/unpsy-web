@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import type { User } from '~/utils/models'
-
-const prisma = new PrismaClient()
 
 export default defineProtectedEventHandler<User>(async (_event, userId) => {
   try {

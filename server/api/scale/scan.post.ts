@@ -3,11 +3,9 @@ import fs from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { ofetch } from 'ofetch'
 
-import { PrismaClient } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import { type ScaleName, ScaleNameToDBScaleName, DBScaleNameToScaleName, type ScaleType } from '~/utils/models'
 import { isExpired } from '~~/utils/helpers'
-
-const prisma = new PrismaClient()
 
 async function saveImages(images: string[]): Promise<void> {
   const buffer = Buffer.from(images[0].split(',')[1], 'base64')

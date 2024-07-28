@@ -18,14 +18,15 @@ logs
 .idea
 
 # Local env files
-.env*
+.env
+.env.*
 !.env.example
 
-# database Files
-database
+# Prisma files
+prisma/data
 
-prisma/data/*
-!prisma/data/.gitkeep
+# database files
+database
 
 assets/documents/*
 !assets/documents/.gitkeep

@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import { validateSignature } from '~~/server/utils/helpers'
-
-const prisma = new PrismaClient()
 
 export default defineEventHandler<{ id: string; name: string; email: string | null; phone: string }>(async (event) => {
   const config = useRuntimeConfig()

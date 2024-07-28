@@ -4,7 +4,7 @@
 
 # Psy
 
-> A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. Explore the depths of psychology with ease.
+> A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner
 
 <p align="center">
   <a href="https://uptime.betterstack.com/?utm_source=status_badge">
@@ -32,22 +32,3 @@
 | JEPQ    | -       | -      | -         |
 | LEYTON  | -       | -      | -         |
 | BAI     | -       | -      | -         |
-
-## Todos
-
-- Create login model and let anonymous user convert to loggedin user
-- Include the full form of every scale
-- Improve Feedback Form
-- Upload documents to firestore
-- Deploy Psy-OMR to VPS
-- Add Beck Anxiety Inventory
-
-## Keywords
-
-- psychology tool - 3,600
-- beck anxiety inventory scoring - 720
-- free psychological assessment tools list - 210
-- beck anxiety inventory scoring interpretation - 170
-- psyc tools - 140
-- psychotherapy tools - 70
-- psychological measurement tools - 50

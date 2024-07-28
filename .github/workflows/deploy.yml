@@ -17,7 +17,7 @@ env:
   IMAGE_TITLE:
   BUILDTIME:
   VERSION:
-  PORT: 2001
+  PORT: 2002
 
 jobs:
   build:

@@ -20,7 +20,12 @@ logs
 .idea
 
 # Local env files
-.env*
+.env
+.env.*
+
+# Prisma files
+prisma/schema.prisma
+prisma/migraitons
 
 # database Files
 database

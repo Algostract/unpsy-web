@@ -1,10 +1,8 @@
-import type { Gender } from '@prisma/client'
-import { PrismaClient, Plan } from '@prisma/client'
+import prisma from '~/lib/prisma'
+import { Plan, type Gender } from '@prisma/client'
 import { addTimeToNow, validateSignature } from '~~/server/utils/helpers'
 import { capitalize } from '~~/utils/helpers'
 import { dataScales } from '~/server/utils/data'
-
-const prisma = new PrismaClient()
 
 export default defineEventHandler<Promise<{ id: string; name: string }>>(async (event) => {
   const config = useRuntimeConfig()

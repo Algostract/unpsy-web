@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '~/lib/prisma'
 import { createUPIPayment } from '~~/server/utils/payment'
 import { type PurchaseStatus, DBScaleNameToScaleName } from '~/utils/models'
 import { renderSVG as generateQR } from 'uqr'
-
-const prisma = new PrismaClient()
 
 export default defineProtectedEventHandler<{
   id: string

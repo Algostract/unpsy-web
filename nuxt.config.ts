@@ -238,8 +238,7 @@ export default defineNuxtConfig({
     },
   },
 
-  gtag: {
-  },
+  gtag: {},
 
   compatibilityDate: '2024-07-20',
 })

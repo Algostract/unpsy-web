@@ -25,10 +25,18 @@ logs
 .idea
 
 # Local env files
-.env*
+.env
+.env.*
+!.env.example
+
+# Docker files
+.dockerignore
+Dockerfile
+
+# Prisma files
+prisma
+!prisma/schema.prisma
+!prisma/migraitons
 
 # database Files
 database
-
-.dockerignore
-Dockerfile
