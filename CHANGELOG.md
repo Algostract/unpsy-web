@@ -1,5 +1,11 @@
 # unpsy-web
 
+## 0.7.0
+
+### Minor Changes
+
+- f8a7ca0: chore: update project structure and configurations, add new components and assets
+
 ## 0.6.2
 
 ### Patch Changes
