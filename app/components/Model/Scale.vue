@@ -15,6 +15,8 @@ const emit = defineEmits<{
   (event: 'calculate', data: { index: number; value: number | null }[]): void
 }>()
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 /* -------------------- */
 const dataSplideOption: Options = {
   arrows: true,
@@ -143,7 +145,7 @@ watchArray(
 )
 
 async function onCalculate(data: { index: number; value: number }[]) {
-  useTrackEvent('calculate', {
+  gaProxy.gtag('event', 'calculate', {
     scale: props.name,
   })
 
@@ -171,7 +173,7 @@ async function onCalculate(data: { index: number; value: number }[]) {
 function onPrint(_data: { index: number; value: number | null }[]) {}
 
 function onClose() {
-  useTrackEvent('model_test_close', {
+  gaProxy.gtag('event', 'model_test_close', {
     scale: props.name,
   })
 

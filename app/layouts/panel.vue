@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
 const route = useRoute()
 
 const isMounted = ref(false)
@@ -16,7 +17,7 @@ onMounted(() => {
 const authStore = useAuth()
 
 function onHelp() {
-  useTrackEvent('model_feedback_open')
+  gaProxy.gtag('event', 'model_feedback_open')
 
   authStore.updateFeedbackStatus('triggered')
 }

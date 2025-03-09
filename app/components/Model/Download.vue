@@ -9,6 +9,8 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 const selectedScales = ref(new Set<string>([]))
 
 function toggle(scale: string) {
@@ -24,7 +26,7 @@ function onMassSelect(type: 'select' | 'deselect') {
 }
 
 function onDownload() {
-  useTrackEvent('download_templates', {
+  gaProxy.gtag('event', 'download_templates', {
     scales: Array.from(selectedScales.value.keys()),
   })
 
@@ -39,7 +41,7 @@ function onDownload() {
 }
 
 function onClose() {
-  useTrackEvent('model_download_close')
+  gaProxy.gtag('event', 'model_download_close')
 
   emit('close')
 }

@@ -6,8 +6,10 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 function onClose() {
-  useTrackEvent('model_feedback_close')
+  gaProxy.gtag('event', 'model_feedback_close')
 
   emit('close')
 }

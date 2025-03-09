@@ -24,6 +24,8 @@ useSeoMeta({
   ogUrl: url + '/scanner',
 })
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 const scale = ref<{
   name: string
   type: 'binary' | 'pentanary'
@@ -75,7 +77,7 @@ async function convertImagesToObjectURL(imageDatas: File[] | string[]): Promise<
 async function uploadFile(files: File[] | null) {
   if (!files) return
 
-  useTrackEvent('upload_files', {
+  gaProxy.gtag('event', 'upload_files', {
     count: files.length,
   })
 
@@ -113,18 +115,21 @@ onChange((files) => {
 const { isOverDropZone } = useDropZone(dropZoneRef, uploadFile)
 
 function onDownload() {
-  useTrackEvent('model_download_open')
+  gaProxy.gtag('event', 'model_download_open')
+
   openModel.value = 'download'
 }
 
 function onReset() {
-  useTrackEvent('scan_reset')
+  gaProxy.gtag('event', 'scan_reset')
+
   documents.value = []
   fileDialogReset()
 }
 
 function onContinue() {
-  useTrackEvent('scan_continue')
+  gaProxy.gtag('event', 'scan_continue')
+
   openModel.value = 'scale'
 }
 

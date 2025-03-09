@@ -6,6 +6,8 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 const isLoading = ref(false)
 const tab = ref<'select' | 'payment' | 'complete'>('select')
 
@@ -64,7 +66,7 @@ const { resume, pause } = useIntervalFn(
 )
 
 async function onPay() {
-  useTrackEvent('pay_init', {
+  gaProxy.gtag('event', 'pay_init', {
     scales: Array.from(selectedScales.value.keys()),
   })
 
@@ -83,7 +85,7 @@ async function onPay() {
 }
 
 function onClose() {
-  useTrackEvent('model_payment_close', {
+  gaProxy.gtag('event', 'model_payment_close', {
     scales: Array.from(selectedScales.value.keys()),
   })
 

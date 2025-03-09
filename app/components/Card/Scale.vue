@@ -15,6 +15,8 @@ const emit = defineEmits<{
   (event: 'openTest' | 'openPayment'): void
 }>()
 
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+
 const updatedIn = useTimeAgo(() => props.updatedAt, {
   messages: {
     invalid: 'Invalid Date',
@@ -44,9 +46,10 @@ const updatedIn = useTimeAgo(() => props.updatedAt, {
 } */
 
 function onOpenTest() {
-  useTrackEvent('model_test_open', {
+  gaProxy.gtag('event', 'model_test_open', {
     scale: props.name,
   })
+
   emit('openTest')
 }
 
