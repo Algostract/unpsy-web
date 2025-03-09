@@ -51,7 +51,7 @@ export const useAuth = () => {
       isInit.value = true
 
       try {
-        parseJWT(getToken('auth'))
+        parseJwt(getToken('auth'))
       } catch {
         authToken.value = null
       }

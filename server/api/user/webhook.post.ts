@@ -1,6 +1,5 @@
 import { Plan, type Gender } from '@prisma/client'
 import prisma from '~~/lib/prisma'
-import { addTimeToNow, validateSignature } from '~~/server/utils/helpers'
 
 export default defineEventHandler<Promise<{ id: string; name: string }>>(async (event) => {
   const config = useRuntimeConfig()
@@ -50,6 +49,7 @@ export default defineEventHandler<Promise<{ id: string; name: string }>>(async (
 
     if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2002')
       throw createError({ statusCode: 409, statusMessage: 'Phone or Email already exists' })
+    if (typeof error === 'object' && error !== null && 'statusCode' in error) throw error
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

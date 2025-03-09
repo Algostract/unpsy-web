@@ -19,7 +19,7 @@ export const $fetchAPI = <T = unknown, R extends NitroFetchRequest = NitroFetchR
       }
       // check access token is expired
       try {
-        parseJWT(authStore.getToken('access'))
+        parseJwt(authStore.getToken('access'))
       } catch {
         await authStore.updateToken()
         // @ts-expect-error add authorization token
