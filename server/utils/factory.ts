@@ -118,7 +118,11 @@ class ShiftScale {
 
     for (const response of responses) {
       if (lastAnswer && lastAnswer.value !== response.value) {
-        lastAnswer.value === true ? TFShiftCount++ : FTShiftCount++
+        if (lastAnswer.value === true) {
+          TFShiftCount++
+        } else {
+          FTShiftCount++
+        }
       }
 
       lastAnswer = response
@@ -150,7 +154,7 @@ class AverageScale {
   private indices: number[]
   // private weight: number;
 
-  constructor(indices: number[], weight: number) {
+  constructor(indices: number[], _weight: number) {
     this.indices = indices
     // this.weight = weight
   }

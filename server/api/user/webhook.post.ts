@@ -1,8 +1,6 @@
-import prisma from '~/lib/prisma'
 import { Plan, type Gender } from '@prisma/client'
+import prisma from '~~/lib/prisma'
 import { addTimeToNow, validateSignature } from '~~/server/utils/helpers'
-import { capitalize } from '~~/utils/helpers'
-import { dataScales } from '~/server/utils/data'
 
 export default defineEventHandler<Promise<{ id: string; name: string }>>(async (event) => {
   const config = useRuntimeConfig()
@@ -22,7 +20,7 @@ export default defineEventHandler<Promise<{ id: string; name: string }>>(async (
     }>(event)
     if (!validateSignature(JSON.stringify(body), signature, config.private.authWebhook)) throw createError({ statusCode: 403, statusMessage: 'Invalid Signature' })
 
-    const scales = dataScales
+    // const scales = dataScales
     const user = await prisma.user.create({
       data: {
         id: body.id,
@@ -47,10 +45,11 @@ export default defineEventHandler<Promise<{ id: string; name: string }>>(async (
     })
 
     return { id: user.id, name: user.name }
-  } catch (error: any) {
-    if (error.code == 'P2002') throw createError({ statusCode: 409, statusMessage: 'Phone or Email already exists' })
-
+  } catch (error: unknown) {
     console.error('API user/webhook POST', error)
+
+    if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2002')
+      throw createError({ statusCode: 409, statusMessage: 'Phone or Email already exists' })
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

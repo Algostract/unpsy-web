@@ -1,8 +1,8 @@
-import { PrismaClient, ScaleName, ScaleType } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-function createUsers() {}
+// function createUsers() {}
 
 async function main() {
   // Users

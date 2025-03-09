@@ -1,35 +1,47 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-07-20',
+  future: {
+    compatibilityVersion: 4,
+  },
   devtools: { enabled: true },
-
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/image',
-    '@nuxt/test-utils',
+    '@nuxt/scripts',
+    '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
     '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
-    'nuxt-gtag',
     'nuxt-icons',
   ],
-  /*  routeRules: {
-     '/': { redirect: '/dashboard' }
-   }, */
+  routeRules: {
+    '/': { swr: true },
+    '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/api/**': { cors: true },
+  },
   runtimeConfig: {
     app: {
       version: '',
+      buildTime: '',
     },
     public: {
+      scripts: {
+        googleAnalytics: {
+          id: '',
+        },
+      },
       authUrl: '',
       apiUrl: '',
       omrUrl: '',
     },
     private: {
-      corsUrl: '',
       authAccessSecret: '',
       authWebhook: '',
       paymentUrl: '',
@@ -40,24 +52,38 @@ export default defineNuxtConfig({
       notionDBId: '',
     },
   },
-
+  nitro: {
+    compressPublicAssets: true,
+  },
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+    },
+  },
+  scripts: {
+    registry: {
+      googleAnalytics: true,
+    },
+  },
   image: {
     format: ['avif', 'webp'],
     width: 1024,
     quality: 80,
   },
-
   colorMode: {
     preference: 'system',
     fallback: 'light',
     classSuffix: '',
   },
-
   site: {
     name: 'Psy',
-    url: 'https://psy.monalisa-bairagi.com',
+    url: 'https://unpsy.monalisa-bairagi.com',
   },
-
+  robots: {
+    disallow: ['/_nuxt/'],
+  },
   pwa: {
     scope: '/',
     base: '/',
@@ -237,8 +263,4 @@ export default defineNuxtConfig({
       type: 'module',
     },
   },
-
-  gtag: {},
-
-  compatibilityDate: '2024-07-20',
 })

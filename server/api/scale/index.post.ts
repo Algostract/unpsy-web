@@ -1,7 +1,6 @@
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import { ReportStatus } from '@prisma/client'
 import { type ScaleName, ScaleNameToDBScaleName } from '~/utils/models'
-import { dataScales } from '~/server/utils/data'
 
 export default defineProtectedEventHandler<{ name: string; value: number }[]>(async (event, userId) => {
   try {
@@ -14,7 +13,7 @@ export default defineProtectedEventHandler<{ name: string; value: number }[]>(as
 
     if (DBScale == undefined) throw createError({ statusCode: 404, statusMessage: `${scale} Scale not found` })
 
-    let result: {} = {}
+    let result = {}
     for (const item of data) {
       if (item.value === null || !(item.value === 0 || item.value === 1 || item.value === 2 || item.value === 3 || item.value === 4 || item.value == 5))
         throw createError({ statusCode: 400, statusMessage: 'Invalid value detected. Value must be 0 to 5' })
@@ -41,11 +40,12 @@ export default defineProtectedEventHandler<{ name: string; value: number }[]>(as
     })
 
     return formattedResult
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API scale/index POST', error)
 
-    if (error.statusCode === 400) throw error
-    else if ((error.code = 'P2025')) throw createError({ statusCode: 404, statusMessage: 'Subscription Not Found' })
+    if (typeof error === 'object' && error !== null && 'statusCode' in error && (error as { statusCode: number }).statusCode === 400) throw error
+    else if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025')
+      throw createError({ statusCode: 404, statusMessage: 'Subscription Not Found' })
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

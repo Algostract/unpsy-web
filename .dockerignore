@@ -1,6 +1,7 @@
 .vs
 .vscode
 
+# Git/Github
 .changeset
 .git
 .github
@@ -19,24 +20,17 @@ node_modules
 logs
 *.log
 
+# Testing
+coverage
+
 # Misc
 .DS_Store
 .fleet
 .idea
 
-# Local env files
-.env
-.env.*
-!.env.example
+# Env files
+.env*
 
 # Docker files
 .dockerignore
 Dockerfile
-
-# Prisma files
-prisma
-!prisma/schema.prisma
-!prisma/migraitons
-
-# database Files
-database

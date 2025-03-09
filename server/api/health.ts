@@ -1,4 +1,4 @@
-export default defineEventHandler<{ status: string }>((event) => {
+export default defineEventHandler<{ status: string }>(() => {
   const config = useRuntimeConfig().app
   // console.log({ config });
 

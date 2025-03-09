@@ -1,5 +1,5 @@
-import prisma from '~/lib/prisma'
-import { type PurchaseStatus } from '~/utils/models'
+import prisma from '~~/lib/prisma'
+import type { PurchaseStatus } from '~/utils/models'
 
 export default defineProtectedEventHandler<{ status: PurchaseStatus }>(async (event, userId) => {
   const id = getRouterParam(event, 'id') ?? ''
@@ -17,7 +17,7 @@ export default defineProtectedEventHandler<{ status: PurchaseStatus }>(async (ev
     })
 
     return { status: purchase.status.toLowerCase() as PurchaseStatus }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API purchase/[id] GET', error)
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })

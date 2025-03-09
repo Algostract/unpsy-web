@@ -1,6 +1,4 @@
-import prisma from '~/lib/prisma'
-import { type ScaleType, type SubscribedScale } from '~/utils/models'
-import { dataScales } from '~/server/utils/data'
+import type { ScaleType, SubscribedScale } from '~/utils/models'
 
 export default defineEventHandler<Promise<SubscribedScale[]>>(async () => {
   try {
@@ -30,7 +28,7 @@ export default defineEventHandler<Promise<SubscribedScale[]>>(async () => {
         publishedAt: publishedAt,
       }
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API scale/index GET', error)
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })

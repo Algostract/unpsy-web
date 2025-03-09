@@ -1,7 +1,6 @@
 import type { NitroFetchRequest, TypedInternalResponse } from 'nitropack'
 import type { FetchOptions } from 'ofetch'
 import { calculateChecksum } from './helpers'
-import { trimObject } from '../../utils/helpers'
 
 interface PaymentUPIIntentResponse {
   success: boolean
@@ -20,7 +19,7 @@ interface PaymentUPIIntentResponse {
           vpa: string
         }
       | {
-          qrData: any
+          qrData: string
           type: 'UPI_QR'
           qr: string
         }
@@ -34,7 +33,7 @@ export async function usePaymentAPI<T = unknown, R extends NitroFetchRequest = N
 ): Promise<TypedInternalResponse<R, T>> {
   const config = useRuntimeConfig()
 
-  const salt = config.private.paymentSecret as any
+  const salt = JSON.parse(config.private.paymentSecret)
   opts.body.merchantId = config.private.paymentId
   // opts.body.merchantUserId = config.private.paymentUserId
   if (callbackUrl) opts.body.callbackUrl = `${config.public.apiUrl}/api/payment/webhook`
@@ -48,7 +47,7 @@ export async function usePaymentAPI<T = unknown, R extends NitroFetchRequest = N
     headers: {
       'X-Verify': calculateChecksum(encodedPayload, request as unknown as string, salt),
     },
-    onRequest({ request, options }) {
+    onRequest({ request }) {
       console.log('Intercepted Payment Request', request)
     },
     /* onResponse({ response }) {
@@ -59,7 +58,7 @@ export async function usePaymentAPI<T = unknown, R extends NitroFetchRequest = N
     },
   })
 
-  // @ts-ignore
+  // @ts-expect-error custom fetch used
   return customFetch(request, opts)
 }
 
@@ -104,7 +103,7 @@ export async function createUPIPayment({
     deviceContext:
       UPIType[type] === 'UPI_INTENT'
         ? {
-            // @ts-ignore
+            // @ts-expect-error device is selected
             deviceOS: Device[device],
           }
         : undefined,

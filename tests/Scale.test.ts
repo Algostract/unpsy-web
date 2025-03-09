@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { setup, $fetch } from '@nuxt/test-utils'
+// import { setup, $fetch } from '@nuxt/test-utils'
 
 import { Data } from '../server/utils/scale'
 import { BinaryCalculate, PentanaryCalculate } from '../server/utils/calculate'

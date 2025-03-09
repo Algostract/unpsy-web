@@ -3,9 +3,8 @@ import fs from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { ofetch } from 'ofetch'
 
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import { type ScaleName, ScaleNameToDBScaleName, DBScaleNameToScaleName, type ScaleType } from '~/utils/models'
-import { isExpired } from '~~/utils/helpers'
 
 async function saveImages(images: string[]): Promise<void> {
   const buffer = Buffer.from(images[0].split(',')[1], 'base64')
@@ -89,16 +88,18 @@ export default defineProtectedEventHandler<{
         },
         highlights,
       }
-    } catch (error: any) {
-      if (error?.code) throw error
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error !== null && 'code' in error) throw error
 
-      throw createError({ statusCode: error.statusCode, statusMessage: error.data.detail })
+      const typedError = error as { statusCode: number; data: { detail: string } }
+      throw createError({ statusCode: typedError.statusCode, statusMessage: typedError.data.detail })
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API scale/scan POST', error)
 
-    if (typeof error?.statusCode === 'number') throw error
-    else if (error.code === 'P2025') throw createError({ statusCode: 404, statusMessage: 'Subscription Not Found' })
+    if (error && typeof (error as { statusCode?: number }).statusCode === 'number') throw error
+    else if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025')
+      throw createError({ statusCode: 404, statusMessage: 'Subscription Not Found' })
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

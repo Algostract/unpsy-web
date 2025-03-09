@@ -1,4 +1,4 @@
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import { createUPIPayment } from '~~/server/utils/payment'
 import { type PurchaseStatus, DBScaleNameToScaleName } from '~/utils/models'
 import { renderSVG as generateQR } from 'uqr'
@@ -62,9 +62,8 @@ export default defineProtectedEventHandler<{
 
     const gatewayResult = await createUPIPayment({
       transactionId: purchase.id,
-      // @ts-ignore
       amount: totalPrice,
-      phone: purchase.user.phone,
+      phone: purchase.user.phone ?? '',
       type: 'qr',
     })
 
@@ -75,11 +74,12 @@ export default defineProtectedEventHandler<{
       // qrImage: `data:image/png;base64,${gatewayResult.qr}`,
       qrImage: generateQR(gatewayResult.intentUrl as string),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API purchase/index POST', error)
 
-    if (error.statusCode === 400) throw error
-    else if (error.statusCode === 404) throw error
+    const err = error as { statusCode?: number }
+    if (err.statusCode === 400) throw error
+    else if (err.statusCode === 404) throw error
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

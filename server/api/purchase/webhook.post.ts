@@ -1,7 +1,6 @@
 import { PurchaseStatus } from '@prisma/client'
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import { addTimeToDate, addTimeToNow, validateChecksum } from '~~/server/utils/helpers'
-import { isExpired } from '~~/utils/helpers'
 
 interface PaymentData {
   merchantId: string
@@ -68,7 +67,7 @@ export default defineEventHandler<{ message: string }>(async (event) => {
     if (checksum == null) throw createError({ statusCode: 401, statusMessage: 'Checksum Not found' })
 
     const { response: payload } = await readBody<{ response: string }>(event)
-    const salt = config.private.paymentSecret as any
+    const salt = JSON.parse(config.private.paymentSecret)
 
     if (!validateChecksum(payload, salt, checksum)) throw createError({ statusCode: 403, statusMessage: 'Invalid Checksum' })
 
@@ -142,11 +141,12 @@ export default defineEventHandler<{ message: string }>(async (event) => {
     }
 
     return { message: 'Valid signature' }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API purchase/webhook POST', error)
 
-    if (error.statusCode === 401) throw error
-    else if (error.statusCode === 403) throw error
+    const err = error as { statusCode?: number }
+    if (err.statusCode === 401) throw error
+    else if (err.statusCode === 403) throw error
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

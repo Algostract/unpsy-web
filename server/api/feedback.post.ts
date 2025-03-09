@@ -20,7 +20,7 @@ export default defineProtectedEventHandler(async (event, userId) => {
   try {
     const { name, email, phone, helpful, accuracy, interested, recommend, suggestion } = await readBody<Request>(event)
 
-    const result = await notion.pages.create({
+    await notion.pages.create({
       parent: {
         database_id: config.private.notionDBId,
       },
@@ -100,10 +100,12 @@ export default defineProtectedEventHandler(async (event, userId) => {
     })
 
     return { success: true }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API feedback POST', error)
 
-    if (error.statusMessage) throw error
+    if (error instanceof Error && 'statusCode' in error) {
+      throw error
+    }
 
     throw createError({
       statusCode: 500,

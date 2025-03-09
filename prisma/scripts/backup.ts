@@ -3,7 +3,7 @@ import fs from 'node:fs'
 
 const prisma = new PrismaClient()
 
-function dumpIntoFile(label: string, data: any) {
+function dumpIntoFile(label: string, data: unknown) {
   console.log('label', data)
 
   const jsonString = JSON.stringify(data, null, 2)

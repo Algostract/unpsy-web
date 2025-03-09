@@ -1,4 +1,4 @@
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import { validateSignature } from '~~/server/utils/helpers'
 
 export default defineEventHandler<{ id: string; name: string; email: string | null; phone: string }>(async (event) => {
@@ -24,12 +24,11 @@ export default defineEventHandler<{ id: string; name: string; email: string | nu
     })
 
     return user
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API user/webhook GET', error)
 
-    if (error.code == 'P2025') throw createError({ statusCode: 404, statusMessage: 'User not found' })
-    else if (error.statusCode === 401) throw error
-    else if (error.statusCode === 403) throw error
+    if (error && typeof (error as { statusCode?: number }).statusCode === 'number') throw error
+    if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025') throw createError({ statusCode: 404, statusMessage: 'User Not Found' })
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

@@ -7,8 +7,10 @@ dist
 
 # Node dependencies
 node_modules
+
+# Package Manager
 package.json
-package-lock.json
+pnpm-lock.yaml
 
 # Logs
 logs
@@ -19,13 +21,6 @@ logs
 .fleet
 .idea
 
-# Local env files
-.env
-.env.*
-
-# Prisma files
-prisma/schema.prisma
-prisma/migraitons
-
-# database Files
-database
+# Env files
+.env*
+!.env.example

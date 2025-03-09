@@ -7,7 +7,7 @@ function BinaryCalculate(scale: ScaleName, data: { index: number; value: boolean
 
   for (const SubScaleName in Scales[scale]) {
     try {
-      // @ts-ignore
+      // @ts-expect-error scale name selected
       const SubScaleMeta = Scales[scale][SubScaleName]
       let SubScale: SingleScale | SingleWeightedScale | PairScale | ShiftScale | CountScale
 
@@ -27,9 +27,10 @@ function BinaryCalculate(scale: ScaleName, data: { index: number; value: boolean
         case 'count':
           SubScale = new CountScale(SubScaleMeta.start, SubScaleMeta.count)
           break
+        default:
+          SubScale = new SingleScale(SubScaleMeta.items.T, SubScaleMeta.items.F)
       }
 
-      // @ts-ignore
       result.push({ name: SubScaleName, score: SubScale.score(data) })
     } catch (error) {
       console.error(`Error in Scale ${scale}, Subscale ${SubScaleName}`, error)
@@ -43,7 +44,7 @@ function PentanaryCalculate(scale: ScaleName, data: { index: number; value: numb
   const result: { name: string; score: number }[] = []
 
   for (const SubScaleName in Scales[scale]) {
-    // @ts-ignore
+    // @ts-expect-error scale name selected
     const SubScaleMeta = Scales[scale][SubScaleName]
     let SubScale: AverageScale | SumScale | CountScale
 
@@ -58,15 +59,17 @@ function PentanaryCalculate(scale: ScaleName, data: { index: number; value: numb
       case 'count':
         SubScale = new CountScale(SubScaleMeta.start, SubScaleMeta.count, SubScaleMeta.label, SubScaleMeta.inverse)
         break
+      default:
+        SubScale = new CountScale(SubScaleMeta.start, SubScaleMeta.count, SubScaleMeta.label, SubScaleMeta.inverse)
     }
 
-    // @ts-ignore
     result.push({ name: SubScaleName, score: SubScale.score(data) })
   }
 
-  if (scale in CompositeFunctions)
-    // @ts-ignore
-    result.push(...CompositeFunctions[scale](result))
+  if (scale in CompositeFunctions) {
+    const composite = CompositeFunctions as Record<ScaleName, (result: { name: string; score: number }[]) => { name: string; score: number }[]>
+    result.push(...composite[scale]!(result))
+  }
   return result.reduce((a, v) => ({ ...a, [v.name]: v.score }), {})
 }
 

@@ -1,4 +1,4 @@
-import prisma from '~/lib/prisma'
+import prisma from '~~/lib/prisma'
 import type { User } from '~/utils/models'
 
 export default defineProtectedEventHandler<User>(async (_event, userId) => {
@@ -34,10 +34,10 @@ export default defineProtectedEventHandler<User>(async (_event, userId) => {
       })),
       preference: user.preference ? { colorMode: user.preference.isModeLight ? 'light' : 'dark', payment: user.preference.payment.toLowerCase() as 'upi' } : null,
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('API user/index GET', error)
 
-    if ((error.code = 'P2025')) throw createError({ statusCode: 404, statusMessage: 'User Not Found' })
+    if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025') throw createError({ statusCode: 404, statusMessage: 'User Not Found' })
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

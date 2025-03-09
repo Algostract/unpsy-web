@@ -2,7 +2,7 @@
   <img src="./public/logo.png" lt="Logo" width="80" />
 <p>
 
-# Psy
+# UnPsy
 
 > A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner
 

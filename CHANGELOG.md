@@ -1,4 +1,4 @@
-# psy
+# unpsy-web
 
 ## 0.6.2
 

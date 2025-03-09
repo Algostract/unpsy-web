@@ -53,7 +53,7 @@ const Data = {
   'DSMD-C': DSMDCData,
   'DSMD-A': DSMDAData,
 } as const
-type ScaleNames = keyof typeof Scales
+// type ScaleNames = keyof typeof Scales
 const CompositeFunctions = {
   'SCL-90R': SCL90RCompositeFunction,
 } as const

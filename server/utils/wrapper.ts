@@ -15,12 +15,12 @@ export function defineProtectedEventHandler<T>(handler: (event: H3Event, userId:
         const { id: userId } = JWT.verify(token, config.private.authAccessSecret) as JWTToken
 
         return handler(event, userId)
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error instanceof JWT.TokenExpiredError) throw createError({ statusCode: 401, statusMessage: 'Token Expired' })
         else throw createError({ statusCode: 498, statusMessage: 'Invalid Token' })
       }
-    } catch (error: any) {
-      sendError(event, error)
+    } catch (error: unknown) {
+      sendError(event, error as Error)
     }
   })
 }
