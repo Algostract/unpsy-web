@@ -1,7 +1,7 @@
-name: 'unpsy-dev'
+name: 'unpsy'
 services:
   app:
-    # image: 'ghcr.io/shba007/unpsy:latest'
+    image: 'ghcr.io/shba007/unpsy:latest'
     build: .
     restart: on-failure:3
     env_file:
