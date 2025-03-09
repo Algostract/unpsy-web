@@ -1,5 +1,11 @@
 # unpsy-web
 
+## 0.7.1
+
+### Patch Changes
+
+- a83efe6: feat: refactor utility functions added shared utils
+
 ## 0.7.0
 
 ### Minor Changes
