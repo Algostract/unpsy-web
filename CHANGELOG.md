@@ -1,5 +1,11 @@
 # unpsy-web
 
+## 0.7.2
+
+### Patch Changes
+
+- a3c53a6: feat: integrate Google Analytics event tracking in various components
+
 ## 0.7.1
 
 ### Patch Changes
