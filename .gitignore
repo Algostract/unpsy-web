@@ -28,6 +28,7 @@ logs
 prisma/*.db
 prisma/*.db-*
 prisma/generated
+prisma/data
 
 # Static files
 assets/documents
