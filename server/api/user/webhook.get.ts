@@ -1,4 +1,4 @@
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import { validateSignature } from '~~/server/utils/helpers'
 
 export default defineEventHandler<{ id: string; name: string; email: string | null; phone: string }>(async (event) => {

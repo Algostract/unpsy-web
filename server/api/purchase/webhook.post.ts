@@ -1,5 +1,5 @@
 import { PurchaseStatus } from '@prisma/client'
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import { addTimeToDate, addTimeToNow, validateChecksum } from '~~/server/utils/helpers'
 
 interface PaymentData {

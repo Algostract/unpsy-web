@@ -1,4 +1,4 @@
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import { createUPIPayment } from '~~/server/utils/payment'
 import { type PurchaseStatus, DBScaleNameToScaleName } from '~/utils/models'
 import { renderSVG as generateQR } from 'uqr'

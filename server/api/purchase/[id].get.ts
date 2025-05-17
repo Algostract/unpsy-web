@@ -1,4 +1,4 @@
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import type { PurchaseStatus } from '~/utils/models'
 
 export default defineProtectedEventHandler<{ status: PurchaseStatus }>(async (event, userId) => {

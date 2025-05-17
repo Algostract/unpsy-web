@@ -1,5 +1,5 @@
 import { Plan, type Gender } from '@prisma/client'
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 
 export default defineEventHandler<Promise<{ id: string; name: string }>>(async (event) => {
   const config = useRuntimeConfig()

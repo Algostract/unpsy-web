@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { ofetch } from 'ofetch'
 
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import { type ScaleName, ScaleNameToDBScaleName, DBScaleNameToScaleName, type ScaleType } from '~/utils/models'
 
 async function saveImages(images: string[]): Promise<void> {

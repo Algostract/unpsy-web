@@ -1,4 +1,4 @@
-import prisma from '~~/lib/prisma'
+import prisma from '~~/server/utils/prisma'
 import type { User } from '~/utils/models'
 
 export default defineProtectedEventHandler<User>(async (_event, userId) => {
