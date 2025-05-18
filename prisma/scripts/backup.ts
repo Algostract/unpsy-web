@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../server/utils/prisma'
 import fs from 'node:fs'
-
-const prisma = new PrismaClient()
 
 function dumpIntoFile(label: string, data: unknown) {
   console.log('label', data)
