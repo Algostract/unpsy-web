@@ -1,5 +1,27 @@
 # unpsy-web
 
+## v0.7.3
+
+[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.2...v0.7.3)
+
+### 🩹 Fixes
+
+- Correct syntax error in pre-commit hook condition ([3f57f69](https://github.com/shba007/unpsy-web/commit/3f57f69))
+- Improve gitleaks scanning logic in pre-commit hook ([9ad0931](https://github.com/shba007/unpsy-web/commit/9ad0931))
+- Change end of line setting to LF in .editorconfig and update CHANGELOG format ([beca235](https://github.com/shba007/unpsy-web/commit/beca235))
+
+### 💅 Refactors
+
+- Prisma import paths and create a singleton instance, updated ci/cd pipeline ([9638b48](https://github.com/shba007/unpsy-web/commit/9638b48))
+
+### 🏡 Chore
+
+- Add prisma/data to .gitignore ([0da6544](https://github.com/shba007/unpsy-web/commit/0da6544))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## 0.7.2
 
 ### Patch Changes
