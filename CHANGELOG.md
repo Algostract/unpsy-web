@@ -1,5 +1,17 @@
 # unpsy-web
 
+## v0.7.4
+
+[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.3...v0.7.4)
+
+### 🩹 Fixes
+
+- Update docker stack deployment name and add postgres service to docker-compose ([f6100bf](https://github.com/shba007/unpsy-web/commit/f6100bf))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v0.7.3
 
 [compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.2...v0.7.3)
