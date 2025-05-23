@@ -1,5 +1,17 @@
 # unpsy-web
 
+## v0.7.5
+
+[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.4...v0.7.5)
+
+### 🩹 Fixes
+
+- Token reset when /api/scale failed ([5b9fb42](https://github.com/shba007/unpsy-web/commit/5b9fb42))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v0.7.4
 
 [compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.3...v0.7.4)
