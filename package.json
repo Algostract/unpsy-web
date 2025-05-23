@@ -29,7 +29,7 @@
     "clean": "nuxt cleanup",
     "start": "node .output/server/index.mjs",
     "db:seed": "prisma db seed",
-    "db:backup": "npx tsx prisma/backup.ts",
+    "db:backup": "jiti prisma/backup.ts",
     "db:pull": "prisma db pull",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
