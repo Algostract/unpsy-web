@@ -166,7 +166,6 @@ async function onCalculate(data: { index: number; value: number }[]) {
     setTimeout(() => splide.value.go('>'), 300)
   } catch (error) {
     console.error('Fetch API Scale', error)
-    authStore.resetToken()
   }
   isLoading.value = false
 }
