@@ -24,11 +24,14 @@ logs
 !.env.example
 !.env.native
 
+# Tauri files
+native/target/
+native/gen/schemas
+native/gen/android/keystore.properties
+
 # Prisma files
 prisma/*.db
 prisma/*.db-*
 prisma/generated
-prisma/data
 
-# Static files
-assets/documents
+temp

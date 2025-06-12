@@ -25,3 +25,11 @@ logs
 # Env files
 .env*
 !.env.example
+
+# Tauri files
+native
+
+# Prisma files
+prisma/*.db
+prisma/*.db-*
+prisma/generated

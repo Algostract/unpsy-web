@@ -66,7 +66,7 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
         <BaseButton icon="flash" :rounded="true" size="S" @click="emit('openPayment')" />
       </div> -->
       <h6 class="col-start-1 h-fit text-lg">{{ name }}</h6>
-      <BaseRibbon :title="isRecentlyPublished ? 'new' : null" class="absolute -right-[5px] top-14 bg-dark-400" />
+      <AppRibbon :title="isRecentlyPublished ? 'new' : null" class="absolute -right-[5px] top-14 bg-dark-400" />
       <div class="col-span-2 col-start-1 flex h-fit gap-2 text-xs opacity-50">
         <span>Sub Scales {{ subScales.length }}</span>
         <span>&#x2022;</span>
@@ -76,11 +76,11 @@ const isRecentlyPublished = computed(() => new Date().getTime() - new Date(props
       </div>
       <div class="relative col-span-2 col-start-1 h-full">
         <div class="flex max-h-[128px] flex-wrap gap-2 overflow-y-auto">
-          <BaseChips v-for="subScale in subScales" :key="subScale" :title="subScale.replaceAll('-', ' ')" class="cursor-text capitalize" />
+          <AppChips v-for="subScale in subScales" :key="subScale" :title="subScale.replaceAll('-', ' ')" class="cursor-text capitalize" />
         </div>
       </div>
       <span class="col-span-2 col-start-1 row-start-4 w-fit self-center text-xs opacity-50">{{ updatedIn }}</span>
-      <BaseButton class="col-start-2 row-start-4 self-end justify-self-end hover:bg-primary-400" size="S" :rounded="true" icon="keyboard" title="Start" @click="onOpenTest" />
+      <AppButton class="col-start-2 row-start-4 self-end justify-self-end" size="S" :rounded="true" icon="local:keyboard" title="Start" @click="onOpenTest" />
     </div>
   </div>
 </template>

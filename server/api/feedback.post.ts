@@ -1,5 +1,3 @@
-import { Client } from '@notionhq/client'
-
 interface Request {
   name: string
   email: string
@@ -11,18 +9,16 @@ interface Request {
   suggestion: string
 }
 
-const config = useRuntimeConfig()
-const notion = new Client({
-  auth: config.private.notionKey,
-})
-
-export default defineProtectedEventHandler(async (event, userId) => {
+export default defineEventHandler(async (event) => {
   try {
+    const config = useRuntimeConfig()
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
+
     const { name, email, phone, helpful, accuracy, interested, recommend, suggestion } = await readBody<Request>(event)
 
     await notion.pages.create({
       parent: {
-        database_id: config.private.notionDBId,
+        database_id: notionDbId.feedback,
       },
       properties: {
         ID: {
@@ -30,14 +26,6 @@ export default defineProtectedEventHandler(async (event, userId) => {
           rich_text: [
             {
               type: 'text',
-              annotations: {
-                bold: false,
-                italic: true,
-                strikethrough: false,
-                underline: false,
-                code: false,
-                color: 'default',
-              },
               text: {
                 content: userId,
                 link: null,

@@ -32,6 +32,9 @@ coverage
 # Env files
 .env*
 
+# Tauri files
+src-tauri
+
 # Prisma files
 prisma/*.db
 prisma/*.db-*

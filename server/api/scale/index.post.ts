@@ -1,17 +1,22 @@
-import prisma from '~~/server/utils/prisma'
-import { ReportStatus } from '@prisma/client'
-import { type ScaleName, ScaleNameToDBScaleName } from '~/utils/models'
-
-export default defineProtectedEventHandler<{ name: string; value: number }[]>(async (event, userId) => {
+export default defineEventHandler<Promise<{ name: string; value: number }[]>>(async (event) => {
   try {
-    const { scale, data } = await readBody<{
+    const config = useRuntimeConfig()
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
+
+    const { scale: scaleName, data } = await readBody<{
       scale: ScaleName
       data: { index: number; value: number }[]
     }>(event)
 
-    const DBScale = dataScales.find(({ name }) => name === scale)
+    const { user } = await requireUserSession(event)
 
-    if (DBScale == undefined) throw createError({ statusCode: 404, statusMessage: `${scale} Scale not found` })
+    const scales = await readYamlFile<Scale>('scales.yml')
+
+    if (!scales) throw createError({ statusCode: 500, statusMessage: 'scales is undefined' })
+
+    const scale = scales.find(({ name }) => name === scaleName)
+
+    if (scale == undefined) throw createError({ statusCode: 404, statusMessage: `${scaleName} Scale not found` })
 
     let result = {}
     for (const item of data) {
@@ -20,23 +25,83 @@ export default defineProtectedEventHandler<{ name: string; value: number }[]>(as
     }
 
     // Calculate
-    if (DBScale.type === 'binary')
+    if (scale.type === 'binary')
       result = BinaryCalculate(
-        scale,
+        scaleName,
         data.map(({ index, value }) => ({ index, value: !!value }))
       )
-    else if (DBScale.type === 'pentanary') result = PentanaryCalculate(scale, data)
+    else if (scale.type === 'pentanary') result = PentanaryCalculate(scaleName, data)
 
     const formattedResult = Object.entries(result).map(([name, value]) => ({ name, value: value as number }))
 
-    await prisma.report.create({
-      data: {
-        scale: ScaleNameToDBScaleName[scale],
-        status: ReportStatus.Complete,
-        data,
-        value: formattedResult,
-        userId: userId,
+    await notion.pages.create({
+      parent: { database_id: notionDbId.report },
+      properties: {
+        Id: {
+          type: 'title',
+          title: [{ type: 'text', text: { content: scaleName } }],
+        },
+        Scale: {
+          type: 'select',
+          select: { name: scaleName },
+        },
+        User: {
+          type: 'relation',
+          relation: [{ id: user.id }],
+        },
       },
+      children: [
+        {
+          object: 'block',
+          type: 'table',
+          table: {
+            table_width: 2,
+            has_column_header: true,
+            has_row_header: false,
+            children: [
+              {
+                object: 'block' as const,
+                type: 'table_row' as const,
+                table_row: {
+                  cells: [[{ type: 'text' as const, text: { content: 'Index' } }], [{ type: 'text' as const, text: { content: 'Value' } }]],
+                },
+              },
+              ...data.map((item) => ({
+                object: 'block' as const,
+                type: 'table_row' as const,
+                table_row: {
+                  cells: [[{ type: 'text' as const, text: { content: String(item.index) } }], [{ type: 'text' as const, text: { content: String(item.value) } }]],
+                },
+              })),
+            ],
+          },
+        },
+        {
+          object: 'block',
+          type: 'table',
+          table: {
+            table_width: 2,
+            has_column_header: true,
+            has_row_header: false,
+            children: [
+              {
+                object: 'block' as const,
+                type: 'table_row' as const,
+                table_row: {
+                  cells: [[{ type: 'text' as const, text: { content: 'Sub-Scale' } }], [{ type: 'text' as const, text: { content: 'Value' } }]],
+                },
+              },
+              ...formattedResult.map((item) => ({
+                object: 'block' as const,
+                type: 'table_row' as const,
+                table_row: {
+                  cells: [[{ type: 'text' as const, text: { content: item.name } }], [{ type: 'text' as const, text: { content: String(item.value) } }]],
+                },
+              })),
+            ],
+          },
+        },
+      ],
     })
 
     return formattedResult

@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['components/**/*.{vue,js,ts}', 'layouts/**/*.vue', 'pages/**/*.vue', 'App.{js,ts,vue}', 'app.{js,ts,vue}', 'Error.{js,ts,vue}', 'error.{js,ts,vue}', 'content/**/*.md'],
+import type { Config } from 'tailwindcss'
+
+export default <Partial<Config>>{
   darkMode: 'class',
   theme: {
     fontSize: {
@@ -15,29 +15,28 @@ module.exports = {
       '5xl': ['3.5rem', '4.1875rem'],
     },
     fontFamily: {
-      brand: ['Arkhip', 'sans-serif'],
-      head: ['"Exo 2"', 'sans-serif'],
-      body: ['Poppins', 'sans-serif'],
+      main: ['Poppins', 'sans-serif'],
+      sub: ['Arkhip', 'sans-serif'],
     },
     fontWeight: {
-      light: 300,
-      regular: 400,
-      'semi-bold': 500,
-      bold: 600,
+      light: '300',
+      regular: '400',
+      'semi-bold': '500',
+      bold: '600',
     },
     colors: {
       transparent: 'transparent',
       white: '#FFFFFF',
       light: {
-        400: '#EDF0F5',
-        500: '#C1C9D6',
-        600: '#9AA5B8',
+        400: '#F8FAFC',
+        500: '#F1F5F9',
+        600: '#CBD5E1',
       },
       black: '#000000',
       dark: {
-        400: '#181B1B',
-        500: '#1D2020',
-        600: '#232929',
+        400: '#171717',
+        500: '#262626',
+        600: '#404040',
       },
       primary: {
         400: '#8BDAD4',
@@ -45,19 +44,19 @@ module.exports = {
         600: '#29706A',
       },
       success: {
-        400: '#4ADE80',
-        500: '#22C55E',
-        600: '#15803D',
+        400: '#89E774',
+        500: '#4AD42B',
+        600: '#2598EB',
       },
       warning: {
-        400: '#FACC15',
-        500: '#EAB308',
-        600: '#CA8A04',
+        400: '#F0CD42',
+        500: '#ECC113',
+        600: '#D7B942',
       },
       alert: {
-        400: '#E11D48',
-        500: '#BE123C',
-        600: '#9F1239',
+        400: '#F24067',
+        500: '#E11D48',
+        600: '#C02650',
       },
     },
   },

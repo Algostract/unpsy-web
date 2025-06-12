@@ -1,0 +1,318 @@
+---
+- name: EPQ
+  type: binary
+  count: 101
+  monthlyPrice: 20
+  subScales:
+    - psychoticism
+    - neuroticism
+    - extraversion
+    - lie-scale
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: EPQ-R
+  type: binary
+  count: 90
+  monthlyPrice: 18
+  subScales:
+    - psychoticism
+    - neuroticism
+    - extraversion
+    - lie-scale
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: JTCI
+  type: binary
+  count: 108
+  monthlyPrice: 21
+  subScales:
+    - novelty-seeking
+    - harm-avoidance
+    - reward-dependence
+    - persistence
+    - self-directedness
+    - cooperativeness
+    - self-transcendence-(1)
+    - self-transcendence-(2)
+    - validity
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: MACI
+  type: binary
+  count: 160
+  monthlyPrice: 32
+  subScales:
+    - introversive
+    - inhibited
+    - doleful
+    - submissive
+    - dramatizing
+    - egoistic
+    - unruly
+    - forceful
+    - conforming
+    - oppositional
+    - self-demeaning
+    - borderline-tendency
+    - identity-diffusion
+    - self-devaluation
+    - body-disapproval
+    - sexual-discomfort
+    - peer-insecurity
+    - social-insensitivity
+    - family-discord
+    - childhood-abuse
+    - eating-dysfunctions
+    - substance-abuse-proneness
+    - delinquent-predisposition
+    - impulsive-propensity
+    - anxious-feelings
+    - depressive-affect
+    - suicidal-tendency
+    - desirability
+    - debasement
+    - reliability
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: MCMI-3
+  type: binary
+  count: 175
+  monthlyPrice: 35
+  subScales:
+    - desirability
+    - debasement
+    - schizoid
+    - avoidant
+    - depressive
+    - dependent
+    - histrionic
+    - narcissistic
+    - antisocial
+    - sadistic
+    - compulsive
+    - negativistic
+    - masochistic
+    - schizotypal
+    - borderline
+    - paranoid
+    - anxiety
+    - somatoform
+    - bipolar
+    - dysthymia
+    - alcohol-dependence
+    - drug-dependence
+    - post-traumatic-stress-disorder
+    - thought-disorder
+    - major-depression
+    - delusional-disorder
+    - validity
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: MMPI-RF
+  type: binary
+  count: 338
+  monthlyPrice: 67
+  subScales:
+    - VRINr
+    - TRINr
+    - Fr
+    - Fpr
+    - Fs
+    - FBSr
+    - Lr
+    - Kr
+    - EID
+    - THD
+    - BXD
+    - RCd
+    - RC1
+    - RC2
+    - RC3
+    - RC4
+    - RC6
+    - RC7
+    - RC8
+    - RC9
+    - MLS
+    - GIC
+    - HPC
+    - NUC
+    - COG
+    - SUI
+    - HLP
+    - SFD
+    - NFC
+    - STW
+    - AXY
+    - ANP
+    - BRF
+    - MSF
+    - JCP
+    - SUB
+    - AGG
+    - ACT
+    - FML
+    - IPP
+    - SAV
+    - SHY
+    - DSF
+    - AES
+    - MEC
+    - AGGRr
+    - PSYCr
+    - DISCr
+    - NEGEr
+    - INTRr
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: MPQ
+  type: binary
+  count: 100
+  monthlyPrice: 20
+  subScales:
+    - anxiety
+    - hysteria
+    - paranoia
+    - mania
+    - depression
+    - schizophrenia
+    - repressive-sensitization
+    - personality-disorder
+    - k-(lie)
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: TCI
+  type: binary
+  count: 240
+  monthlyPrice: 48
+  subScales:
+    - novelty-seeking
+    - harm-avoidance
+    - reward-dependence
+    - persistance
+    - self-directedness
+    - cooperativeness
+    - self-transcendence
+    - numb
+    - run
+  options:
+    - name: 'False'
+      value: 0
+    - name: 'True'
+      value: 1
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: SCL-90R
+  type: pentanary
+  count: 90
+  monthlyPrice: 27
+  subScales:
+    - somalization
+    - psychoticism
+    - hostility
+    - depression
+    - anxiety
+    - oc
+    - interpersonal
+    - phobia
+    - paranoid-ideation
+    - raw
+    - pst
+    - psdi
+    - gsi
+  options:
+    - name: '0'
+      value: 0
+    - name: '1'
+      value: 1
+    - name: '2'
+      value: 2
+    - name: '3'
+      value: 3
+    - name: '4'
+      value: 4
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: DSMD-A
+  type: pentanary
+  count: 110
+  monthlyPrice: 33
+  subScales:
+    - conduct
+    - delinquency
+    - anxiety
+    - depression
+    - autism
+    - acute-problem
+  options:
+    - name: 'N'
+      value: 0
+    - name: R
+      value: 1
+    - name: O
+      value: 2
+    - name: F
+      value: 3
+    - name: VF
+      value: 4
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'
+- name: DSMD-C
+  type: pentanary
+  count: 111
+  monthlyPrice: 33
+  subScales:
+    - conduct
+    - attention
+    - anxiety
+    - depression
+    - autism
+    - acute-problem
+  options:
+    - name: 'N'
+      value: 0
+    - name: R
+      value: 1
+    - name: O
+      value: 2
+    - name: F
+      value: 3
+    - name: VF
+      value: 4
+  publishedAt: '2024-02-23T14:08:44.658Z'
+  updatedAt: '2024-02-23T14:08:44.658Z'

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-07-20',
+  compatibilityDate: '2024-11-01',
   future: {
     compatibilityVersion: 4,
   },
@@ -8,22 +8,34 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
+    '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
+    '@nuxtjs/i18n',
     '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
-    'nuxt-icons',
+    'nuxt-auth-utils',
+    'nuxt-splide',
   ],
+  nitro: {
+    compressPublicAssets: true,
+    storage: {
+      fs: {
+        driver: 'fs',
+        base: './static',
+      },
+    },
+  },
   routeRules: {
-    '/': { swr: true },
-    '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/': { isr: 3600 },
+    '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/images/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/api/**': { cors: true },
   },
   runtimeConfig: {
@@ -32,28 +44,17 @@ export default defineNuxtConfig({
       buildTime: '',
     },
     public: {
+      siteUrl: '',
       scripts: {
         googleAnalytics: {
           id: '',
         },
       },
-      authUrl: '',
-      apiUrl: '',
-      omrUrl: '',
+      vapidKey: '',
     },
     private: {
-      authAccessSecret: '',
-      authWebhook: '',
-      paymentUrl: '',
-      paymentId: '',
-      paymentUserId: '',
-      paymentSecret: '',
-      notionKey: '',
-      notionDBId: '',
+      notionDbId: '',
     },
-  },
-  nitro: {
-    compressPublicAssets: true,
   },
   app: {
     head: {
@@ -62,15 +63,22 @@ export default defineNuxtConfig({
       },
     },
   },
+  icon: {
+    componentName: 'NuxtIcon',
+    provider: 'server',
+    mode: 'svg',
+    customCollections: [
+      {
+        prefix: 'local',
+        dir: './app/assets/icons',
+      },
+    ],
+  },
+  image: {},
   scripts: {
     registry: {
       googleAnalytics: true,
     },
-  },
-  image: {
-    format: ['avif', 'webp'],
-    width: 1024,
-    quality: 80,
   },
   colorMode: {
     preference: 'system',
@@ -78,8 +86,12 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   site: {
-    name: 'Psy',
-    url: 'https://unpsy.monalisa-bairagi.com',
+    name: 'Unpsy',
+    url: process.env.NUXT_PUBLIC_SITE_URL,
+  },
+  sitemap: {
+    autoLastmod: true,
+    sources: ['/api/__sitemap__/urls'],
   },
   robots: {
     disallow: ['/_nuxt/'],
@@ -90,34 +102,12 @@ export default defineNuxtConfig({
     injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Psy',
-      short_name: 'Psy',
-      description: 'Psychological Assessment Toolkit',
-      theme_color: '#37B1A7',
-      background_color: '#37B1A7',
+      name: 'Unpsy',
+      short_name: 'Unpsy',
+      description: 'A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner',
+      theme_color: '#FFFFFF',
+      background_color: '#FFFFFF',
       orientation: 'portrait',
-      shortcuts: [
-        /* {
-          'name': 'Scan Document',
-          'short_name': 'Scan',
-          'description': 'Scan Document',
-          'url': 'https://psy.monalisa-bairagi.com/scan',
-          'icons': [
-            {
-              src: '/pwa/scan.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any'
-            },
-            {
-              src: '/pwa/scan-maskable.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'maskable'
-            }
-          ]
-        }, */
-      ],
       icons: [
         {
           src: '/pwa/icon-48.png',
@@ -212,20 +202,20 @@ export default defineNuxtConfig({
           form_factor: 'wide',
           label: 'Screenshot 1',
         },
-        /* {
+        {
           src: '/pwa/screenshot-desktop-2.webp',
           sizes: '1024x576',
           type: 'image/webp',
           form_factor: 'wide',
-          label: 'Screenshot 2'
+          label: 'Screenshot 2',
         },
         {
           src: '/pwa/screenshot-desktop-3.webp',
           sizes: '1024x576',
           type: 'image/webp',
           form_factor: 'wide',
-          label: 'Screenshot 3'
-        }, */
+          label: 'Screenshot 3',
+        },
         {
           src: '/pwa/screenshot-mobile-1.webp',
           sizes: '576x1024',
@@ -233,34 +223,54 @@ export default defineNuxtConfig({
           form_factor: 'narrow',
           label: 'Screenshot 1',
         },
-        /* {
+        {
           src: '/pwa/screenshot-mobile-2.webp',
           sizes: '576x1024',
           type: 'image/webp',
           form_factor: 'narrow',
-          label: 'Screenshot 2'
+          label: 'Screenshot 2',
         },
         {
           src: '/pwa/screenshot-mobile-3.webp',
           sizes: '576x1024',
           type: 'image/webp',
           form_factor: 'narrow',
-          label: 'Screenshot 3'
-        }, */
+          label: 'Screenshot 3',
+        },
       ],
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+      globPatterns: ['**/*.{html,css,js,jpg,jpeg,png,svg,webp,ico,mp3,wav,ogg,mp4,webm,mov,m4a,aac}'],
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:html|js|css)$/,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'dynamic-assets',
+          },
+        },
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|webp|ico|mp3|wav|ogg|mp4|webm|mov|m4a|aac)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'static-assets',
+            expiration: { maxEntries: 100, maxAgeSeconds: 7 * 24 * 60 * 60 },
+          },
+        },
+      ],
+      navigateFallback: '/',
+      cleanupOutdatedCaches: true,
+      importScripts: ['/sw-push.js'],
     },
     client: {
       installPrompt: true,
       periodicSyncForUpdates: 3600,
     },
     devOptions: {
-      enabled: false,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
       type: 'module',
+      enabled: false,
+      suppressWarnings: false,
+      navigateFallback: undefined,
     },
   },
 })

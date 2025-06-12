@@ -1,30 +1,48 @@
 <script setup lang="ts">
-const title = `Psy - Psychological Assessment Toolkit`
+const title = `UnPsy - Psychological Assessment Toolkit`
 const description = `A psychoanalytical web tool for diverse assessments and automatic analysis with a built-in scanner. 
 It includes various assessments scales like EPQ, MACI, MCMI 3, TCI, JEPQ.`
-const url = 'https://psy.monalisa-bairagi.com'
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
 
 useHead({
-  titleTemplate: (titleChunk) => (titleChunk ? `Psy - ${titleChunk}` : 'Psy'),
+  htmlAttrs: {
+    lang: 'en',
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    },
+  ],
 })
 
 useSeoMeta({
   ogType: 'website',
   ogImageWidth: 1280,
-  ogImageHeight: 720,
+  ogImageHeight: 640,
   fbAppId: 966242223397117,
   twitterCard: 'summary_large_image',
-  colorScheme: 'dark light',
+  colorScheme: 'light dark',
+  viewport: {
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    minimumScale: 1.0,
+    userScalable: 'no',
+    viewportFit: 'cover',
+  },
 })
 
 useSchemaOrg([
   defineWebPage({
     datePublished: new Date(2020, 6, 2).toISOString(),
-    dateModified: new Date(2020, 6, 5).toISOString(),
+    dateModified: new Date().toISOString(),
     author: 'Shirsendu Bairagi',
   }),
   defineWebSite({
-    url: url,
+    url: siteUrl,
     name: title,
     description: description,
   }),
@@ -39,30 +57,22 @@ useSchemaOrg([
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <LazyAppInstallPrompt />
 </template>
 
 <style>
-@font-face {
-  font-family: 'Arkhip';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('~/assets/fonts/Arkhip-Regular.ttf') format('truetype');
-}
-
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   scrollbar-width: 6px;
+  @apply antialiased;
 }
 
 *::-webkit-scrollbar {
-  @apply block size-[6px] bg-light-500 dark:bg-dark-400;
+  @apply block size-[6px] bg-light-400 dark:bg-dark-400;
 }
 
 *::-webkit-scrollbar-thumb {
-  @apply rounded-md bg-light-400 dark:bg-dark-600;
+  @apply rounded-md bg-light-600 dark:bg-dark-600;
 }
 
 html {
@@ -70,22 +80,19 @@ html {
 }
 
 body {
-  @apply relative min-h-screen overflow-hidden bg-white font-body text-black dark:bg-dark-400 dark:text-white;
+  @apply relative min-h-screen overflow-x-hidden bg-light-400 fill-black font-main text-black dark:bg-dark-400 dark:fill-white dark:text-white;
 }
 
-.nuxt-icon > svg {
-  @apply !m-0;
-}
-
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
-  scrollbar-width: none;
-  /* Firefox */
+svg.iconify--local {
+  @apply !m-0 !box-content;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
-  /* Safari and Chrome */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 </style>

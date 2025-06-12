@@ -1,17 +1,8 @@
-import type { ScaleType, SubscribedScale } from '~/utils/models'
-
 export default defineEventHandler<Promise<SubscribedScale[]>>(async () => {
   try {
-    const scales = dataScales
-    /* const subscribedScales = await prisma.subscription.findMany({
-      where: {
-        userId
-      },
-      select: {
-        name: true,
-        expiresAt: true
-      }
-    }) */
+    const scales = await readYamlFile<SubscribedScale>('scales.yml')
+
+    if (!scales) throw createError({ statusCode: 500, statusMessage: 'scales is undefined' })
 
     return scales.map(({ name, type, count, subScales, options, monthlyPrice, publishedAt, updatedAt }) => {
       // const subscribedScale = subscribedScales.find((subscribedScale) => subscribedScale.name === name)

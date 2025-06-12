@@ -2,6 +2,8 @@ version: '3.9'
 services:
   app:
     image: ghcr.io/shba007/unpsy-web:latest
+    volumes:
+      - unpsy_static:/app/static
     env_file:
       - .env.prod
     ports:
@@ -9,32 +11,14 @@ services:
     networks:
       - front-tier
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
         max_attempts: 3
 
-  postgres:
-    image: postgres:17-alpine
-    command: '-d 1'
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=main
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    ports:
-      - '1005:5432'
-    networks:
-      - front-tier
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
 volumes:
-  db-data:
+  unpsy_static:
+    external: true
 
 networks:
   front-tier:
