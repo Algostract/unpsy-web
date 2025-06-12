@@ -1,0 +1,15 @@
+name: 'unpsy-dev'
+services:
+  app:
+    build: .
+    restart: on-failure:3
+    volumes:
+      - unpsy_static:/app/static
+    env_file:
+      - .env.prod
+    ports:
+      - 4202:3000
+
+volumes:
+  unpsy_static:
+    external: true

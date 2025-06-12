@@ -1,0 +1,45 @@
+# Code Editor files
+.vs
+.vscode
+
+# Git/Github
+.git
+.github
+
+# Nuxt dev/build outputs
+.cache
+.data
+.nuxt
+.nitro
+.output
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Test
+coverage
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Env files
+.env*
+
+# Tauri files
+src-tauri
+
+# Prisma files
+prisma/*.db
+prisma/*.db-*
+prisma/generated
+
+# Docker files
+.dockerignore
+Dockerfile

@@ -1,0 +1,37 @@
+# Nuxt dev/build outputs
+.cache
+.data
+.nuxt
+.nitro
+.output
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+!.env.native
+
+# Tauri files
+native/target/
+native/gen/schemas
+native/gen/android/keystore.properties
+
+# Prisma files
+prisma/*.db
+prisma/*.db-*
+prisma/generated
+
+temp

@@ -1,0 +1,35 @@
+# Nuxt dev/build outputs
+.cache
+.data
+.nuxt
+.nitro
+.output
+dist
+
+# Node dependencies
+node_modules
+
+# Package Manager
+package.json
+bun.lock
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Env files
+.env*
+!.env.example
+
+# Tauri files
+native
+
+# Prisma files
+prisma/*.db
+prisma/*.db-*
+prisma/generated
