@@ -1,5 +1,23 @@
 # unpsy-web
 
+## v0.7.6
+
+[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.5...v0.7.6)
+
+### 🚀 Enhancements
+
+- **migrate:** Initial migration implementation ([d9ff07f](https://github.com/shba007/unpsy-web/commit/d9ff07f))
+- **migrate:** Integrate orphan migrate branch into develop ([887e6dd](https://github.com/shba007/unpsy-web/commit/887e6dd))
+
+### 🏡 Chore
+
+- Update package dependencies and package manager version ([1d54e9a](https://github.com/shba007/unpsy-web/commit/1d54e9a))
+- Remove deprecated items ([4354957](https://github.com/shba007/unpsy-web/commit/4354957))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v0.7.5
 
 [compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.4...v0.7.5)
