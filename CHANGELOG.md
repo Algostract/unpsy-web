@@ -1,5 +1,17 @@
 # unpsy-web
 
+## v0.7.7
+
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.6...v0.7.7)
+
+### 🩹 Fixes
+
+- **auth:** Implement Google OAuth user handling ([511e874](https://github.com/Algostract/unpsy-web/commit/511e874))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v0.7.6
 
 [compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.5...v0.7.6)
