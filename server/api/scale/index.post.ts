@@ -53,52 +53,34 @@ export default defineEventHandler<Promise<{ name: string; value: number }[]>>(as
       children: [
         {
           object: 'block',
-          type: 'table',
-          table: {
-            table_width: 2,
-            has_column_header: true,
-            has_row_header: false,
-            children: [
+          type: 'code',
+          code: {
+            rich_text: [
               {
-                object: 'block' as const,
-                type: 'table_row' as const,
-                table_row: {
-                  cells: [[{ type: 'text' as const, text: { content: 'Index' } }], [{ type: 'text' as const, text: { content: 'Value' } }]],
+                type: 'text',
+                text: {
+                  content: `index,value
+${data.map((item) => `${item.index},${item.value}`).join('\n')}`,
                 },
               },
-              ...data.map((item) => ({
-                object: 'block' as const,
-                type: 'table_row' as const,
-                table_row: {
-                  cells: [[{ type: 'text' as const, text: { content: String(item.index) } }], [{ type: 'text' as const, text: { content: String(item.value) } }]],
-                },
-              })),
             ],
+            language: 'plain text',
           },
         },
         {
           object: 'block',
-          type: 'table',
-          table: {
-            table_width: 2,
-            has_column_header: true,
-            has_row_header: false,
-            children: [
+          type: 'code',
+          code: {
+            rich_text: [
               {
-                object: 'block' as const,
-                type: 'table_row' as const,
-                table_row: {
-                  cells: [[{ type: 'text' as const, text: { content: 'Sub-Scale' } }], [{ type: 'text' as const, text: { content: 'Value' } }]],
+                type: 'text',
+                text: {
+                  content: `sub-scale,value
+${formattedResult.map((item) => `${item.name},${item.value}`).join('\n')}`,
                 },
               },
-              ...formattedResult.map((item) => ({
-                object: 'block' as const,
-                type: 'table_row' as const,
-                table_row: {
-                  cells: [[{ type: 'text' as const, text: { content: item.name } }], [{ type: 'text' as const, text: { content: String(item.value) } }]],
-                },
-              })),
             ],
+            language: 'plain text',
           },
         },
       ],
@@ -108,9 +90,7 @@ export default defineEventHandler<Promise<{ name: string; value: number }[]>>(as
   } catch (error: unknown) {
     console.error('API scale/index POST', error)
 
-    if (typeof error === 'object' && error !== null && 'statusCode' in error && (error as { statusCode: number }).statusCode === 400) throw error
-    else if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'P2025')
-      throw createError({ statusCode: 404, statusMessage: 'Subscription Not Found' })
+    if ('cause' in error) throw error
 
     throw createError({ statusCode: 500, statusMessage: 'Some Unknown Error Found' })
   }

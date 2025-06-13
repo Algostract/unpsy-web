@@ -1,7 +1,4 @@
 interface Request {
-  name: string
-  email: string
-  phone: string
   helpful: boolean
   accuracy: boolean
   interested: boolean
@@ -13,44 +10,29 @@ export default defineEventHandler(async (event) => {
   try {
     const config = useRuntimeConfig()
     const notionDbId = config.private.notionDbId as unknown as NotionDB
+    const { user } = await requireUserSession(event)
 
-    const { name, email, phone, helpful, accuracy, interested, recommend, suggestion } = await readBody<Request>(event)
+    const { helpful, accuracy, interested, recommend, suggestion } = await readBody<Request>(event)
 
     await notion.pages.create({
       parent: {
         database_id: notionDbId.feedback,
       },
       properties: {
-        ID: {
-          type: 'rich_text',
-          rich_text: [
-            {
-              type: 'text',
-              text: {
-                content: userId,
-                link: null,
-              },
-            },
-          ],
-        },
-        Name: {
+        Id: {
           type: 'title',
           title: [
             {
               type: 'text',
               text: {
-                content: name,
+                content: user.id,
               },
             },
           ],
         },
-        Email: {
-          type: 'email',
-          email: email,
-        },
-        Phone: {
-          type: 'phone_number',
-          phone_number: phone,
+        User: {
+          type: 'relation',
+          relation: [{ id: user.id }],
         },
         Helpful: {
           checkbox: helpful,
