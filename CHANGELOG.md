@@ -1,5 +1,17 @@
 # unpsy-web
 
+## v0.7.8
+
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.7...v0.7.8)
+
+### 🩹 Fixes
+
+- Change table -> csv scale post api ([63d740a](https://github.com/Algostract/unpsy-web/commit/63d740a))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v0.7.7
 
 [compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.6...v0.7.7)
