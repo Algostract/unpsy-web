@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   app:
-    image: ghcr.io/shba007/unpsy-web:latest
+    image: ghcr.io/algostract/unpsy-web:latest
     volumes:
       - unpsy_static:/app/static
     env_file:

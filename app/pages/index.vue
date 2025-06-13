@@ -24,28 +24,9 @@ useSchemaOrg([
     itemListElement: [{ name: 'Home', item: '/' }],
   }),
 ])
-
-// const { user, session } = useUserSession()
 </script>
 
 <template>
-  <!--  <main class="relative mx-4 flex min-h-[calc(100vh-7rem)] max-w-[1216px] items-center justify-between xl:mx-auto"> -->
-  <!--  <AuthState>
-    <template #default="{ loggedIn, clear }">
-      <div v-if="loggedIn && user">
-        <h1>Welcome {{ user.name }}!</h1>
-        <p>Logged in since {{ new Date(session.loggedInAt) }}</p>
-        <button @click="clear">Logout</button>
-      </div>
-      <div v-else>
-        <h1>Not logged in</h1>
-        <NuxtLink to="/auth/google" external>Login with Google</NuxtLink>
-      </div>
-    </template>
-<template #placeholder>
-      <button disabled>Loading...</button>
-    </template>
-</AuthState> -->
   <main class="flex h-screen w-screen flex-col-reverse items-center justify-center md:flex-row">
     <section class="flex flex-col gap-6 p-4 md:ml-12 md:gap-8">
       <h6 class="w-fit rounded-full border border-primary-500 px-4 py-3 text-sm">Created by Psychologist for Psychologist</h6>

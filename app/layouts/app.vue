@@ -24,7 +24,7 @@ const userFirstName = computed(() => user.value && user.value.name.split(' ')[0]
         <NuxtIcon name="local:logo" class="text-[96px]" />
         <h1 class="font-sub text-[56px] uppercase">Unpsy</h1>
       </div>
-      <NuxtLink to="/auth/google" external class="inline-flex items-center justify-center gap-2 rounded-full bg-white/20 px-2.5 py-2 hover:bg-white/30">
+      <NuxtLink to="/api/auth/google" external class="inline-flex items-center justify-center gap-2 rounded-full bg-white/20 px-2.5 py-2 hover:bg-white/30">
         <NuxtIcon name="devicon:google" class="text-[20px]" />
         Continue with Google
       </NuxtLink>

@@ -71,7 +71,7 @@ docker volume create \
   --name unpsy_static \
   --driver local \
   --opt type=none \
-  --opt device=~/Algostract/unpsy/static \
+  --opt device="$(pwd)/static" \
   --opt o=bind
 ```
 

@@ -2,17 +2,17 @@
 
 ## v0.7.6
 
-[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.5...v0.7.6)
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.5...v0.7.6)
 
 ### 🚀 Enhancements
 
-- **migrate:** Initial migration implementation ([d9ff07f](https://github.com/shba007/unpsy-web/commit/d9ff07f))
-- **migrate:** Integrate orphan migrate branch into develop ([887e6dd](https://github.com/shba007/unpsy-web/commit/887e6dd))
+- **migrate:** Initial migration implementation ([d9ff07f](https://github.com/Algostract/unpsy-web/commit/d9ff07f))
+- **migrate:** Integrate orphan migrate branch into develop ([887e6dd](https://github.com/Algostract/unpsy-web/commit/887e6dd))
 
 ### 🏡 Chore
 
-- Update package dependencies and package manager version ([1d54e9a](https://github.com/shba007/unpsy-web/commit/1d54e9a))
-- Remove deprecated items ([4354957](https://github.com/shba007/unpsy-web/commit/4354957))
+- Update package dependencies and package manager version ([1d54e9a](https://github.com/Algostract/unpsy-web/commit/1d54e9a))
+- Remove deprecated items ([4354957](https://github.com/Algostract/unpsy-web/commit/4354957))
 
 ### ❤️ Contributors
 
@@ -20,11 +20,11 @@
 
 ## v0.7.5
 
-[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.4...v0.7.5)
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.4...v0.7.5)
 
 ### 🩹 Fixes
 
-- Token reset when /api/scale failed ([5b9fb42](https://github.com/shba007/unpsy-web/commit/5b9fb42))
+- Token reset when /api/scale failed ([5b9fb42](https://github.com/Algostract/unpsy-web/commit/5b9fb42))
 
 ### ❤️ Contributors
 
@@ -32,11 +32,11 @@
 
 ## v0.7.4
 
-[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.3...v0.7.4)
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.3...v0.7.4)
 
 ### 🩹 Fixes
 
-- Update docker stack deployment name and add postgres service to docker-compose ([f6100bf](https://github.com/shba007/unpsy-web/commit/f6100bf))
+- Update docker stack deployment name and add postgres service to docker-compose ([f6100bf](https://github.com/Algostract/unpsy-web/commit/f6100bf))
 
 ### ❤️ Contributors
 
@@ -44,21 +44,21 @@
 
 ## v0.7.3
 
-[compare changes](https://github.com/shba007/unpsy-web/compare/v0.7.2...v0.7.3)
+[compare changes](https://github.com/Algostract/unpsy-web/compare/v0.7.2...v0.7.3)
 
 ### 🩹 Fixes
 
-- Correct syntax error in pre-commit hook condition ([3f57f69](https://github.com/shba007/unpsy-web/commit/3f57f69))
-- Improve gitleaks scanning logic in pre-commit hook ([9ad0931](https://github.com/shba007/unpsy-web/commit/9ad0931))
-- Change end of line setting to LF in .editorconfig and update CHANGELOG format ([beca235](https://github.com/shba007/unpsy-web/commit/beca235))
+- Correct syntax error in pre-commit hook condition ([3f57f69](https://github.com/Algostract/unpsy-web/commit/3f57f69))
+- Improve gitleaks scanning logic in pre-commit hook ([9ad0931](https://github.com/Algostract/unpsy-web/commit/9ad0931))
+- Change end of line setting to LF in .editorconfig and update CHANGELOG format ([beca235](https://github.com/Algostract/unpsy-web/commit/beca235))
 
 ### 💅 Refactors
 
-- Prisma import paths and create a singleton instance, updated ci/cd pipeline ([9638b48](https://github.com/shba007/unpsy-web/commit/9638b48))
+- Prisma import paths and create a singleton instance, updated ci/cd pipeline ([9638b48](https://github.com/Algostract/unpsy-web/commit/9638b48))
 
 ### 🏡 Chore
 
-- Add prisma/data to .gitignore ([0da6544](https://github.com/shba007/unpsy-web/commit/0da6544))
+- Add prisma/data to .gitignore ([0da6544](https://github.com/Algostract/unpsy-web/commit/0da6544))
 
 ### ❤️ Contributors
 
